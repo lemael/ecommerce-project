@@ -1,100 +1,49 @@
 using EcommerceChatbot.Data;
 using EcommerceChatbot.Services;
-using Microsoft.EntityFrameworkCore;
 using EcommerceChatbot.Models;
+using Microsoft.EntityFrameworkCore;
 using DotNetEnv;
 using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Charger les variables d'environnement
-DotNetEnv.Env.Load();
+// Charger variables d'environnement (.env + Render)
+Env.Load();
+builder.Configuration.AddEnvironmentVariables();
 
-// Configuration des services
+// Services
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-
-// Configuration CORS
-builder.Services.AddCors(options =>
-{
-    options.AddDefaultPolicy(policy =>
-    {
-        policy.WithOrigins(
-                "http://localhost:3000",
-                "https://ecommerce-project-2kvd.onrender.com"
-            )
-            .AllowAnyHeader()
-            .AllowAnyMethod();
-    });
-});
-
+builder.Services.AddCors(o => o.AddDefaultPolicy(p =>
+    p.WithOrigins("http://localhost:3000", "https://ecommerce-project-2kvd.onrender.com")
+     .AllowAnyHeader().AllowAnyMethod()));
 builder.Services.AddHttpClient<OpenRouterService>();
 
-// Configuration de la base de données
-builder.Configuration.AddEnvironmentVariables();
+// Connexion DB
+var connStr = Environment.GetEnvironmentVariable("DefaultConnection") 
+    ?? builder.Configuration.GetConnectionString("DefaultConnection")
+    ?? throw new Exception("Chaîne de connexion manquante");
 
-var connectionString = Environment.GetEnvironmentVariable("DefaultConnection") 
-    ?? builder.Configuration.GetConnectionString("DefaultConnection");
+Console.WriteLine($"Connexion DB : {new NpgsqlConnectionStringBuilder(connStr) { Password = "*****" }}");
 
-if (string.IsNullOrEmpty(connectionString))
-{
-    Console.WriteLine("ERREUR: Aucune chaîne de connexion trouvée");
-    throw new Exception("Configuration de base de données manquante");
-}
-
-try 
-{
-    var safeConnectionString = new NpgsqlConnectionStringBuilder(connectionString) 
-    {
-        Password = "*****"
-    }.ToString();
-    Console.WriteLine($"Configuration de connexion utilisée : {safeConnectionString}");
-
-    builder.Services.AddDbContext<ApplicationDbContext>(options => 
-    {
-        options.UseNpgsql(connectionString);
-        options.EnableSensitiveDataLogging();
-        options.LogTo(Console.WriteLine, LogLevel.Information);
-    });
-}
-catch (Exception ex) 
-{
-    Console.WriteLine($"ERREUR DE CONFIGURATION DB: {ex}");
-    throw;
-}
+builder.Services.AddDbContext<ApplicationDbContext>(opt => 
+    opt.UseNpgsql(connStr)
+       .EnableSensitiveDataLogging()
+       .LogTo(Console.WriteLine, LogLevel.Information));
 
 var app = builder.Build();
 
-// Application des migrations
+// Migrations auto
 using (var scope = app.Services.CreateScope())
 {
-    try 
-    {
-        var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        if (db.Database.GetPendingMigrations().Any())
-        {
-            Console.WriteLine("Application des migrations...");
-            db.Database.Migrate();
-        }
-        
-        if (!db.Database.CanConnect())
-            throw new Exception("Échec de connexion à la base de données");
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"ERREUR MIGRATION: {ex}");
-        throw;
-    }
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    if (db.Database.GetPendingMigrations().Any()) db.Database.Migrate();
+    if (!db.Database.CanConnect()) throw new Exception("Connexion DB échouée");
 }
 
-// Pipeline HTTP
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
+// Middleware
+if (app.Environment.IsDevelopment()) { app.UseSwagger(); app.UseSwaggerUI(); }
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
@@ -103,48 +52,21 @@ app.UseAuthorization();
 
 // Endpoints
 app.MapControllers();
-app.MapGet("/api/test", () => "API fonctionnelle");
-app.MapGet("/debug", async (ApplicationDbContext db) => 
-{
-    try {
-        return Results.Ok(new {
-            dbStatus = await db.Database.CanConnectAsync(),
-            tables = db.Model.GetEntityTypes().Select(e => e.GetTableName())
-        });
-    }
-    catch (Exception ex) {
-        return Results.Problem(ex.ToString());
-    }
-});
+app.MapGet("/api/test", () => "API OK");
+app.MapGet("/debug", async (ApplicationDbContext db) =>
+    Results.Ok(new { dbStatus = await db.Database.CanConnectAsync(), 
+                     tables = db.Model.GetEntityTypes().Select(e => e.GetTableName()) }));
 
-// Gestion des produits
-app.MapGet("/products", async (ApplicationDbContext db) => 
-    await db.Products.ToListAsync());
-
-app.MapPost("/add-product", async (HttpRequest request, ApplicationDbContext db) =>
+app.MapGet("/products", async (ApplicationDbContext db) => await db.Products.ToListAsync());
+app.MapPost("/add-product", async (HttpRequest req, ApplicationDbContext db) =>
 {
-    var form = await request.ReadFormAsync();
-    var product = new Product
-    {
-        Name = form["name"],
-        Price = decimal.Parse(form["price"]),
-        Quantity = int.Parse(form["quantity"])
-    };
-    
-    db.Products.Add(product);
+    var f = await req.ReadFormAsync();
+    var p = new Product { Name = f["name"], Price = decimal.Parse(f["price"]), Quantity = int.Parse(f["quantity"]) };
+    db.Products.Add(p);
     await db.SaveChangesAsync();
     return Results.Ok("Produit ajouté !");
 });
 
-// Gestion dynamique du port
+// Lancement avec port dynamique
 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-try
-{
-    app.Run($"http://0.0.0.0:{port}");
-    Console.WriteLine($"Application démarrée sur le port {port}");
-}
-catch (IOException ex) when (ex.InnerException is System.Net.Sockets.SocketException se && se.ErrorCode == 98)
-{
-    Console.WriteLine($"Le port {port} est occupé, tentative avec port aléatoire...");
-    app.Run($"http://0.0.0.0:0"); // 0 = port aléatoire
-}
+app.Run($"http://0.0.0.0:{port}");

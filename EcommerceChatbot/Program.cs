@@ -1,83 +1,40 @@
 using EcommerceChatbot.Data;
-using EcommerceChatbot.Services;
-using EcommerceChatbot.Models;
 using Microsoft.EntityFrameworkCore;
-using DotNetEnv;
 using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Charger variables d'environnement (.env + Render)
-Env.Load();
-builder.Configuration.AddEnvironmentVariables();
-
-// Services
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// 1. Configuration minimale
 builder.Services.AddControllers();
-builder.Services.AddCors(o => o.AddDefaultPolicy(p =>
-    p.WithOrigins("http://localhost:3000", "https://ecommerce-project-2kvd.onrender.com")
-     .AllowAnyHeader().AllowAnyMethod()));
-builder.Services.AddHttpClient<OpenRouterService>();
-
-// Connexion DB
-var connStr = Environment.GetEnvironmentVariable("DefaultConnection") 
-    ?? builder.Configuration.GetConnectionString("DefaultConnection")
-    ?? throw new Exception("Chaîne de connexion manquante");
-
-Console.WriteLine($"Connexion DB : {new NpgsqlConnectionStringBuilder(connStr) { Password = "*****" }}");
-
-builder.Services.AddDbContext<ApplicationDbContext>(opt => 
-    opt.UseNpgsql(connStr)
-       .EnableSensitiveDataLogging()
-       .LogTo(Console.WriteLine, LogLevel.Information));
+builder.Services.AddDbContext<ApplicationDbContext>(options => 
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
-// Migrations auto
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    if (db.Database.GetPendingMigrations().Any()) db.Database.Migrate();
-    if (!db.Database.CanConnect()) throw new Exception("Connexion DB échouée");
-}
-
-// Middleware
-if (app.Environment.IsDevelopment()) { app.UseSwagger(); app.UseSwaggerUI(); }
-app.UseHttpsRedirection();
-app.UseStaticFiles();
+// 2. Configuration essentielle
 app.UseRouting();
-app.UseCors();
-app.UseAuthorization();
-
-// Endpoints
 app.MapControllers();
-app.MapGet("/api/test", () => "API OK");
-app.MapGet("/debug", async (ApplicationDbContext db) =>
-    Results.Ok(new { dbStatus = await db.Database.CanConnectAsync(), 
-                     tables = db.Model.GetEntityTypes().Select(e => e.GetTableName()) }));
 
-app.MapGet("/products", async (ApplicationDbContext db) => await db.Products.ToListAsync());
-app.MapPost("/add-product", async (HttpRequest req, ApplicationDbContext db) =>
-{
-    var f = await req.ReadFormAsync();
-    var p = new Product { Name = f["name"], Price = decimal.Parse(f["price"]), Quantity = int.Parse(f["quantity"]) };
-    db.Products.Add(p);
-    await db.SaveChangesAsync();
-    return Results.Ok("Produit ajouté !");
-});
-
-// Lancement avec port dynamique
-
-// 4. Gestion robuste du port
-var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+// 3. Gestion robuste du port
 try
 {
+    var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+    Console.WriteLine($"Tentative de démarrage sur le port {port}");
+    
     app.Run($"http://0.0.0.0:{port}");
 }
-catch (IOException ex)
+catch (IOException ex) when (ex.InnerException is System.Net.Sockets.SocketException { ErrorCode: 98 })
 {
-    // Fallback sur port aléatoire
-    var fallbackPort = new Random().Next(5000, 60000);
-    app.Run($"http://0.0.0.0:{fallbackPort}");
+    // Solution radicale pour Render
+    var randomPort = new Random().Next(10001, 65535);
+    Console.WriteLine($"Port occupé, basculement sur port aléatoire: {randomPort}");
+    
+    var newBuilder = WebApplication.CreateBuilder(args);
+    newBuilder.WebHost.UseUrls($"http://0.0.0.0:{randomPort}");
+    
+    var newApp = newBuilder.Build();
+    newApp.UseRouting();
+    newApp.MapControllers();
+    
+    newApp.Run();
 }

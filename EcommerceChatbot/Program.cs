@@ -68,5 +68,16 @@ app.MapPost("/add-product", async (HttpRequest req, ApplicationDbContext db) =>
 });
 
 // Lancement avec port dynamique
+
+// 4. Gestion robuste du port
 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-app.Run($"http://0.0.0.0:{port}");
+try
+{
+    app.Run($"http://0.0.0.0:{port}");
+}
+catch (IOException ex)
+{
+    // Fallback sur port aléatoire
+    var fallbackPort = new Random().Next(5000, 60000);
+    app.Run($"http://0.0.0.0:{fallbackPort}");
+}

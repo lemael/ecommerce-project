@@ -5,6 +5,54 @@
       "PackagePath": "staticwebassets/add-product.html"
     },
     {
+      "Id": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/asset-manifest.json",
+      "PackagePath": "staticwebassets/build/asset-manifest.json"
+    },
+    {
+      "Id": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/favicon.ico",
+      "PackagePath": "staticwebassets/build/favicon.ico"
+    },
+    {
+      "Id": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/index.html",
+      "PackagePath": "staticwebassets/build/index.html"
+    },
+    {
+      "Id": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/logo192.png",
+      "PackagePath": "staticwebassets/build/logo192.png"
+    },
+    {
+      "Id": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/logo512.png",
+      "PackagePath": "staticwebassets/build/logo512.png"
+    },
+    {
+      "Id": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/manifest.json",
+      "PackagePath": "staticwebassets/build/manifest.json"
+    },
+    {
+      "Id": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/robots.txt",
+      "PackagePath": "staticwebassets/build/robots.txt"
+    },
+    {
+      "Id": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/static/css/main.dc4d6ff2.css",
+      "PackagePath": "staticwebassets/build/static/css/main.dc4d6ff2.css"
+    },
+    {
+      "Id": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/static/css/main.dc4d6ff2.css.map",
+      "PackagePath": "staticwebassets/build/static/css/main.dc4d6ff2.css.map"
+    },
+    {
+      "Id": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/static/js/main.c52f53f9.js",
+      "PackagePath": "staticwebassets/build/static/js/main.c52f53f9.js"
+    },
+    {
+      "Id": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/static/js/main.c52f53f9.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/build/static/js/main.c52f53f9.js.LICENSE.txt"
+    },
+    {
+      "Id": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/static/js/main.c52f53f9.js.map",
+      "PackagePath": "staticwebassets/build/static/js/main.c52f53f9.js.map"
+    },
+    {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.EcommerceChatbot.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

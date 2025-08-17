@@ -3,12 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using EcommerceChatbot.Data;
 using EcommerceChatbot.Models;
 using EcommerceChatbot.Services;
+using Microsoft.AspNetCore.SpaServices;
 var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -17,7 +19,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowSpecificOrigin",
         policy =>
         {
-            policy.WithOrigins("http://localhost:3000")
+            policy.WithOrigins("https://ecommerce-project-2kvd.onrender.com/")
                 .AllowAnyMethod()
                 .AllowAnyHeader();
         });
@@ -34,13 +36,21 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Middleware pour servir les fichiers statiques (wwwroot)
+app.UseStaticFiles();
+app.UseHttpsRedirection();
 app.UseHttpsRedirection();
 
 var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
-
+app.MapGet("/", async () =>
+{
+    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/build", "index.html");
+    var html = await File.ReadAllTextAsync(filePath);
+    return Results.Content(html, "text/html");
+});
 app.MapGet("/weatherforecast", () =>
 {
     var forecast =  Enumerable.Range(1, 5).Select(index =>

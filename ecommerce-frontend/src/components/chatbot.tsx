@@ -17,9 +17,12 @@ const ChatBot: React.FC = () => {
     setMessages((prev) => [...prev, { text: question, sender: "user" }]);
 
     try {
-      const response = await axios.post("http://localhost:8080/api/chatbot", {
-        question,
-      });
+      const response = await axios.post(
+        "https://ecommerce-project-2kvd.onrender.com/api/chatbot",
+        {
+          question,
+        }
+      );
 
       setMessages((prev) => [
         ...prev,

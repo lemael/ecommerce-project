@@ -1,40 +1,121 @@
-using EcommerceChatbot.Data;
-using Microsoft.EntityFrameworkCore;
 using Npgsql;
-
+using Microsoft.EntityFrameworkCore;
+using EcommerceChatbot.Data;
+using EcommerceChatbot.Models;
+using EcommerceChatbot.Services;
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Configuration minimale
-builder.Services.AddControllers();
-builder.Services.AddDbContext<ApplicationDbContext>(options => 
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Add services to the container.
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3000")
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
+});
+builder.Services.AddTransient<OpenRouterService>();
+builder.Services.AddHttpClient();
+builder.Services.AddControllers();
 var app = builder.Build();
 
-// 2. Configuration essentielle
-app.UseRouting();
-app.MapControllers();
-
-// 3. Gestion robuste du port
-try
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
 {
-    var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-    Console.WriteLine($"Tentative de démarrage sur le port {port}");
-    
-    app.Run($"http://0.0.0.0:{port}");
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
-catch (IOException ex) when (ex.InnerException is System.Net.Sockets.SocketException { ErrorCode: 98 })
+
+app.UseHttpsRedirection();
+
+var summaries = new[]
 {
-    // Solution radicale pour Render
-    var randomPort = new Random().Next(10001, 65535);
-    Console.WriteLine($"Port occupé, basculement sur port aléatoire: {randomPort}");
+    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+};
+
+app.MapGet("/weatherforecast", () =>
+{
+    var forecast =  Enumerable.Range(1, 5).Select(index =>
+        new WeatherForecast
+        (
+            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+            Random.Shared.Next(-20, 55),
+            summaries[Random.Shared.Next(summaries.Length)]
+        ))
+        .ToArray();
+    return forecast;
+})
+.WithName("GetWeatherForecast")
+.WithOpenApi();
+app.MapGet("/form", async () =>
+{
+    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "add-product.html");
+    var html = await File.ReadAllTextAsync(filePath);
+    return Results.Content(html, "text/html");
+});
+
+app.MapPost("/add-product", async (HttpRequest request, ApplicationDbContext db) =>
+{
+   var form = await request.ReadFormAsync();
+   var name = form["name"];
+   var price = decimal.Parse(form["price"]);
+   var quantity = int.Parse(form["quantity"]);
     
-    var newBuilder = WebApplication.CreateBuilder(args);
-    newBuilder.WebHost.UseUrls($"http://0.0.0.0:{randomPort}");
-    
-    var newApp = newBuilder.Build();
-    newApp.UseRouting();
-    newApp.MapControllers();
-    
-    newApp.Run();
+   if (string.IsNullOrWhiteSpace(name) || price <= 0 || quantity < 0)
+    {
+        return Results.BadRequest("Données invalides");
+    }
+
+    var product = new Product
+    {
+        Name = name,
+        Price = price,
+        Quantity = quantity
+    };
+
+    db.Products.Add(product);
+    await db.SaveChangesAsync();
+
+    return Results.Ok("Produit ajouté !");
+});
+app.MapGet("/products", async (ApplicationDbContext db) =>
+{
+    var products = await db.Products.ToListAsync();
+    return Results.Ok(products);
+});
+app.MapGet("/api/products", () => new { message = "Test réussi" });
+app.MapGet("/debug", async (ApplicationDbContext db) =>
+{
+    try
+    {
+        return Results.Ok(new
+        {
+            dbStatus = await db.Database.CanConnectAsync(),
+            tables = db.Model.GetEntityTypes().Select(e => e.GetTableName())
+        });
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem(ex.ToString());
+    }
+});
+
+
+app.UseRouting();
+app.UseCors("AllowSpecificOrigin");
+app.UseAuthorization();
+app.MapControllers();
+app.Run();
+
+record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+{
+    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }

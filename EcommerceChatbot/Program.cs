@@ -25,7 +25,7 @@ builder.Services.AddCors(options =>
                 .AllowAnyHeader();
         });
 });
-builder.Services.AddTransient<OpenRouterService>();
+builder.Services.AddTransient<GeminiService>();
 builder.Services.AddHttpClient();
 builder.Services.AddControllers();
 var app = builder.Build();

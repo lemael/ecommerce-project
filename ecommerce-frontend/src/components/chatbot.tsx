@@ -19,6 +19,7 @@ const ChatBot: React.FC = () => {
     try {
       const response = await axios.post(
         "https://ecommerce-project-2kvd.onrender.com/api/chatbot",
+        //"http://localhost:5045/api/chatbot",
         {
           question,
         }

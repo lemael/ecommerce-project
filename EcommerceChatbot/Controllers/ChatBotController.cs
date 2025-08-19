@@ -4,6 +4,7 @@ using EcommerceChatbot.Models;
 using EcommerceChatbot.Services;
 using EcommerceChatbot.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 
 
 [ApiController]
@@ -13,12 +14,13 @@ public class ChatBotController : ControllerBase
   
     private static List<ChatExchange> _history = new List<ChatExchange>();
 
-     private readonly OpenRouterService _openRouterService;
+    // private readonly OpenRouterService _openRouterService;
+    private readonly GeminiService _geminiService;
     private readonly ApplicationDbContext _db;
 
-    public ChatBotController(OpenRouterService openRouterService, ApplicationDbContext db)
+    public ChatBotController(GeminiService geminiService, ApplicationDbContext db)
     {
-        _openRouterService = openRouterService;
+        _geminiService = geminiService;
         _db = db;
     }
 
@@ -41,7 +43,7 @@ public class ChatBotController : ControllerBase
             // Construire le prompt complet avec les produits + question
           string prompt = $"Hier ist die Liste der Produkte:\n{productList}\nBeantworte die folgende Frage: {request.Question}";
 
-            var result = await _openRouterService.GetResponseAsync(prompt);
+            var result = await _geminiService.AskGeminiAsync(prompt);
             Console.WriteLine("Réponse finale du bot : " + result);
             Console.WriteLine("liste de produits : " + productList);
             

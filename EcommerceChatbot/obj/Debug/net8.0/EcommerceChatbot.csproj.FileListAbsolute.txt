@@ -1,3 +1,11 @@
+/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/obj/Debug/net8.0/EcommerceChatbot.csproj.AssemblyReference.cache
+/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/obj/Debug/net8.0/EcommerceChatbot.GeneratedMSBuildEditorConfig.editorconfig
+/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/obj/Debug/net8.0/EcommerceChatbot.AssemblyInfoInputs.cache
+/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/obj/Debug/net8.0/EcommerceChatbot.AssemblyInfo.cs
+/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/obj/Debug/net8.0/EcommerceChatbot.csproj.CoreCompileInputs.cache
+/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/obj/Debug/net8.0/EcommerceChatbot.MvcApplicationPartsAssemblyInfo.cs
+/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/obj/Debug/net8.0/EcommerceChatbot.MvcApplicationPartsAssemblyInfo.cache
+/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/obj/Debug/net8.0/EcommerceChatbot.sourcelink.json
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/appsettings.Development.json
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/appsettings.json
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/EcommerceChatbot.staticwebassets.runtime.json
@@ -9,6 +17,7 @@
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/OpenAI.dll
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/DotNetEnv.dll
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/Humanizer.dll
+/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/Microsoft.AspNetCore.NodeServices.dll
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/Microsoft.AspNetCore.OpenApi.dll
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/Microsoft.AspNetCore.SpaServices.dll
@@ -36,6 +45,12 @@
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/Microsoft.Extensions.Logging.Abstractions.dll
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/Microsoft.Extensions.Options.dll
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/Microsoft.Extensions.Primitives.dll
+/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/Microsoft.IdentityModel.Abstractions.dll
+/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/Microsoft.IdentityModel.Logging.dll
+/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.dll
+/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.dll
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/Microsoft.OpenApi.dll
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/Mono.TextTemplating.dll
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/Newtonsoft.Json.dll
@@ -57,6 +72,7 @@
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/System.Composition.Runtime.dll
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/System.Composition.TypedParts.dll
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/System.Diagnostics.DiagnosticSource.dll
+/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/System.IO.Pipelines.dll
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/System.Memory.Data.dll
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/System.Text.Encodings.Web.dll
@@ -148,14 +164,6 @@
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/runtimes/win-x64/native/e_sqlite3.dll
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/runtimes/win-x86/native/e_sqlite3.dll
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/runtimes/browser/lib/net8.0/System.Text.Encodings.Web.dll
-/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/obj/Debug/net8.0/EcommerceChatbot.csproj.AssemblyReference.cache
-/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/obj/Debug/net8.0/EcommerceChatbot.GeneratedMSBuildEditorConfig.editorconfig
-/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/obj/Debug/net8.0/EcommerceChatbot.AssemblyInfoInputs.cache
-/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/obj/Debug/net8.0/EcommerceChatbot.AssemblyInfo.cs
-/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/obj/Debug/net8.0/EcommerceChatbot.csproj.CoreCompileInputs.cache
-/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/obj/Debug/net8.0/EcommerceChatbot.MvcApplicationPartsAssemblyInfo.cs
-/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/obj/Debug/net8.0/EcommerceChatbot.MvcApplicationPartsAssemblyInfo.cache
-/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/obj/Debug/net8.0/EcommerceChatbot.sourcelink.json
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/obj/Debug/net8.0/staticwebassets.build.json
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/obj/Debug/net8.0/staticwebassets.development.json
 /home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/obj/Debug/net8.0/staticwebassets/msbuild.EcommerceChatbot.Microsoft.AspNetCore.StaticWebAssets.props

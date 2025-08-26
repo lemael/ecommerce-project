@@ -10,6 +10,7 @@ type Message = {
 const ChatBot: React.FC = () => {
   const [question, setQuestion] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   const askQuestion = async () => {
     if (!question.trim()) return;
@@ -19,10 +20,7 @@ const ChatBot: React.FC = () => {
     try {
       const response = await axios.post(
         "https://ecommerce-project-2kvd.onrender.com/api/chatbot",
-        //"http://localhost:5045/api/chatbot",
-        {
-          question,
-        }
+        { question }
       );
 
       setMessages((prev) => [
@@ -40,66 +38,112 @@ const ChatBot: React.FC = () => {
   };
 
   return (
-    <div style={styles.container}>
-      <h2 style={styles.header}>🛒 Chatbot e-commerce</h2>
-
-      <div style={styles.chatBox}>
-        {messages.map((msg, index) => (
-          <div
-            key={index}
-            style={{
-              ...styles.message,
-              alignSelf: msg.sender === "user" ? "flex-end" : "flex-start",
-              backgroundColor: msg.sender === "user" ? "#d1e7dd" : "#f8d7da",
-            }}
-          >
-            <strong>{msg.sender === "user" ? "Vous" : "Bot"}:</strong>{" "}
-            {msg.text}
-          </div>
-        ))}
-      </div>
-
-      <div style={styles.inputArea}>
-        <input
-          type="text"
-          value={question}
-          onChange={(e) => setQuestion(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && askQuestion()}
-          placeholder="Posez une question..."
-          style={styles.input}
-        />
-        <button onClick={askQuestion} style={styles.button}>
-          Envoyer
+    <div>
+      {/* Bouton flottant en bas à droite */}
+      {!isOpen && (
+        <button style={styles.fab} onClick={() => setIsOpen(true)}>
+          💬
         </button>
-      </div>
+      )}
+
+      {/* Fenêtre du chatbot */}
+      {isOpen && (
+        <div style={styles.chatWindow}>
+          <div style={styles.header}>
+            <span>🛒 Chatbot e-commerce</span>
+            <button style={styles.closeButton} onClick={() => setIsOpen(false)}>
+              ✖
+            </button>
+          </div>
+
+          <div style={styles.chatBox}>
+            {messages.map((msg, index) => (
+              <div
+                key={index}
+                style={{
+                  ...styles.message,
+                  alignSelf: msg.sender === "user" ? "flex-end" : "flex-start",
+                  backgroundColor:
+                    msg.sender === "user" ? "#d1e7dd" : "#f8d7da",
+                }}
+              >
+                <strong>{msg.sender === "user" ? "Vous" : "Bot"}:</strong>{" "}
+                {msg.text}
+              </div>
+            ))}
+          </div>
+
+          <div style={styles.inputArea}>
+            <input
+              type="text"
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && askQuestion()}
+              placeholder="Posez une question..."
+              style={styles.input}
+            />
+            <button onClick={askQuestion} style={styles.button}>
+              Envoyer
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
 const styles: { [key: string]: React.CSSProperties } = {
-  container: {
-    width: "400px",
-    margin: "40px auto",
-    padding: "20px",
+  fab: {
+    position: "fixed",
+    bottom: "20px",
+    right: "20px",
+    width: "60px",
+    height: "60px",
+    borderRadius: "50%",
+    border: "none",
+    backgroundColor: "#28a745",
+    color: "#fff",
+    fontSize: "24px",
+    cursor: "pointer",
+    boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+  },
+  chatWindow: {
+    position: "fixed",
+    bottom: "80px",
+    right: "20px",
+    width: "350px",
+    height: "450px",
     border: "1px solid #ccc",
     borderRadius: "12px",
-    boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
-    fontFamily: "Arial, sans-serif",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
     backgroundColor: "#fff",
-  },
-  header: {
-    textAlign: "center",
-    marginBottom: "15px",
-  },
-  chatBox: {
     display: "flex",
     flexDirection: "column",
-    gap: "10px",
-    height: "300px",
-    overflowY: "auto",
-    border: "1px solid #ddd",
-    borderRadius: "8px",
+    overflow: "hidden",
+    fontFamily: "Arial, sans-serif",
+  },
+  header: {
+    backgroundColor: "#007bff",
+    color: "#fff",
     padding: "10px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  closeButton: {
+    background: "transparent",
+    border: "none",
+    color: "#fff",
+    fontSize: "18px",
+    cursor: "pointer",
+  },
+  chatBox: {
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
+    padding: "10px",
+    overflowY: "auto",
     backgroundColor: "#f9f9f9",
   },
   message: {
@@ -108,18 +152,19 @@ const styles: { [key: string]: React.CSSProperties } = {
     borderRadius: "8px",
   },
   inputArea: {
-    marginTop: "10px",
     display: "flex",
     gap: "8px",
+    padding: "10px",
+    borderTop: "1px solid #ddd",
   },
   input: {
     flex: 1,
-    padding: "10px",
+    padding: "8px",
     borderRadius: "6px",
     border: "1px solid #ccc",
   },
   button: {
-    padding: "10px 14px",
+    padding: "8px 12px",
     borderRadius: "6px",
     border: "none",
     backgroundColor: "#007bff",

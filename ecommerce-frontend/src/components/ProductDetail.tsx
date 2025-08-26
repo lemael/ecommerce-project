@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Product } from "../models/Produkt";
 import handleBuy from "../services/api";
+import { ORDERS_URL, PRODUCTS_URL } from "../utils/constants";
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -9,7 +10,7 @@ const ProductDetail = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5045/products/${id}`)
+    fetch(PRODUCTS_URL + `/${id}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -41,7 +42,7 @@ const ProductDetail = () => {
       <button
         style={styles.buyButton}
         onClick={() =>
-          handleBuy("http://localhost:5045/orders", {
+          handleBuy(ORDERS_URL, {
             productId: id!,
             quantity: 1,
           })

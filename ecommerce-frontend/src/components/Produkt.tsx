@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Product } from "../models/Produkt";
+import { PRODUCTS_URL } from "../utils/constants";
 import ProductCard from "./ProductCard";
 
 const ProductComponent = () => {
@@ -7,7 +8,7 @@ const ProductComponent = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("http://localhost:5045/products")
+    fetch(PRODUCTS_URL)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

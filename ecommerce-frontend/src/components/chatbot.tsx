@@ -1,6 +1,7 @@
 // src/components/ChatBot.tsx
 import axios from "axios";
 import React, { useState } from "react";
+import { ChatbotUrl } from "../utils/constants";
 
 type Message = {
   text: string;
@@ -18,10 +19,7 @@ const ChatBot: React.FC = () => {
     setMessages((prev) => [...prev, { text: question, sender: "user" }]);
 
     try {
-      const response = await axios.post(
-        "https://ecommerce-project-2kvd.onrender.com/api/chatbot",
-        { question }
-      );
+      const response = await axios.post(ChatbotUrl, { question });
 
       setMessages((prev) => [
         ...prev,

@@ -23,7 +23,7 @@ const Header: React.FC<HeaderProps> = ({ showButtons = true }) => {
             <button className="button" onClick={() => navigate("/connexion")}>
               Anmelden
             </button>
-            <button className="button" onClick={() => navigate("/Inscription")}>
+            <button className="button" onClick={() => navigate("/inscription")}>
               Registrieren
             </button>
           </div>

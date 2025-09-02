@@ -1,7 +1,12 @@
 # 🛍️ E-Commerce Website with AI Chatbot
 
-This project is a fullstack e-commerce application built with **React (TypeScript)** on the frontend and **.NET (C#)** on the backend.
-It includes authentication, product management, an AI-powered chatbot for customer support, and deployment via **Render** using Docker.
+This project is a full-stack **E-Commerce Website** built with **React (TypeScript)** for the frontend and **.NET** for the backend.  
+It also includes an **AI-powered chatbot** for customer support (Kundenberatung).  
+
+The application supports **user authentication** (login & registration) with **JWT-based security**, product management, and deployment on **Render**.  
+The database is **PostgreSQL**, hosted on Render as well.  
+
+🔗 **Live Preview:** [E-Commerce Website on Render](https://ecommerce-project-2kvd.onrender.com)
 
 ---
 

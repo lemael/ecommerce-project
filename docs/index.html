@@ -1,18 +1,226 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>Documentation - Mon Projet</title>
-</head>
-<body>
-  <h1>Bienvenue dans la documentation de mon projet 🚀</h1>
-  <p>Ce projet fait ...</p>
+<html lang="de">
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dokumentation Ecommerce Frontend</title>
+  </head>
+  <body>
+    <header>
+      <h1>Dokumentation Ecommerce Frontend</h1>
+      <p>React/TypeScript Frontend-Anwendung für E-Commerce-Plattform 🛒</p>
+    </header>
 
-  <h2>Installation</h2>
-  <pre><code>git clone https://github.com/ton-username/mon-projet.git</code></pre>
+    <nav>
+      <a href="#intro">Einführung</a>
+      <a href="#structure">Struktur</a>
+      <a href="#installation">Installation</a>
+      <a href="#verwendung">Verwendung</a>
+      <a href="#tests">Tests</a>
+      <a href="#deployment">Deployment</a>
+    </nav>
 
-  <h2>Utilisation</h2>
-  <p>Expliquer ici comment lancer ton projet.</p>
-</body>
+    <main>
+      <section id="intro">
+        <h2>Einführung</h2>
+        <p>
+          Dieses Projekt ist eine Frontend-Anwendung, die mit React und
+          TypeScript für eine E-Commerce-Plattform entwickelt wurde. Es
+          ermöglicht Benutzern, Produkte zu durchsuchen, einen Warenkorb zu
+          verwalten und Bestellungen aufzugeben.
+        </p>
+
+        <h3>Hauptfunktionen</h3>
+        <ul>
+          <li>Produktanzeige mit Filtern und Suche</li>
+          <li>Warenkorb-Verwaltung</li>
+          <li>Checkout-Prozess</li>
+          <li>Responsive Benutzeroberfläche</li>
+          <li>Unit-Tests mit Jest und React Testing Library</li>
+        </ul>
+      </section>
+
+      <section id="structure">
+        <h2>Projektstruktur</h2>
+        <p>Hier ist die Verzeichnisstruktur des Projekts:</p>
+
+        <div class="file-structure">
+          <div><span class="folder">build</span> - Build-Dateien</div>
+          <div>
+            <span class="folder">coverage</span> - Test-Coverage-Berichte
+          </div>
+          <div>
+            <span class="folder">node_modules</span> - Projektabhängigkeiten
+          </div>
+          <div><span class="folder">public</span> - Öffentliche Dateien</div>
+          <div><span class="folder">src</span> - Anwendungs-Quellcode</div>
+          <div>
+            <span class="file">.gitignore</span> - Von Git ignorierte Dateien
+          </div>
+          <div>
+            <span class="file">jest.config.ts</span> - Jest-Konfiguration
+          </div>
+          <div>
+            <span class="file">package-lock.json</span> - Versionsgesicherte
+            Abhängigkeiten
+          </div>
+          <div>
+            <span class="file">package.json</span> - Projektabhängigkeiten und
+            Skripte
+          </div>
+          <div><span class="file">README.md</span> - Projektdokumentation</div>
+          <div>
+            <span class="file">tsconfig.json</span> - TypeScript-Konfiguration
+          </div>
+        </div>
+
+        <h3>Detaillierte Struktur des src-Ordners</h3>
+        <div class="file-structure">
+          <div><span class="folder">src</span></div>
+          <div>│</div>
+          <div>
+            ├── <span class="folder">components</span> - React-Komponenten
+          </div>
+          <div>
+            │ ├── <span class="folder">__tests__</span> - Komponententests
+          </div>
+          <div>
+            │ ├── <span class="file">HeaderWrapper.tsx</span> - Anwendungsheader
+          </div>
+          <div>
+            │ └── <span class="file">ProductComponent.tsx</span> -
+            Produktkomponente
+          </div>
+          <div>│</div>
+          <div>├── <span class="folder">utils</span> - Hilfsprogramme</div>
+          <div>
+            │ └── <span class="file">constants.ts</span> - Anwendungskonstanten
+          </div>
+          <div>│</div>
+          <div>
+            └── <span class="file">index.tsx</span> - Anwendungseinstiegspunkt
+          </div>
+        </div>
+      </section>
+
+      <section id="installation">
+        <h2>Installation</h2>
+        <p>
+          Befolgen Sie diese Schritte, um das Projekt lokal zu installieren:
+        </p>
+
+        <pre>
+# Repository klonen
+git clone https://github.com/ihr-username/ecommerce-frontend.git
+
+# In das Projektverzeichnis wechseln
+cd ecommerce-frontend
+
+# Abhängigkeiten installieren
+npm install
+      </pre
+        >
+
+        <div class="note">
+          <p>
+            <strong>Hinweis:</strong> Stellen Sie sicher, dass Node.js Version
+            18 oder höher auf Ihrem System installiert ist.
+          </p>
+        </div>
+      </section>
+
+      <section id="verwendung">
+        <h2>Verwendung</h2>
+
+        <h3>Entwicklung</h3>
+        <p>So starten Sie die Anwendung im Entwicklungsmodus:</p>
+        <pre>npm start</pre>
+        <p>
+          Die Anwendung ist unter <code>http://localhost:3000</code> erreichbar.
+        </p>
+
+        <h3>Build</h3>
+        <p>So erstellen Sie einen Production-Build:</p>
+        <pre>npm run build</pre>
+        <p>
+          Die optimierten Dateien werden im <code>build</code>-Ordner generiert.
+        </p>
+      </section>
+
+      <section id="tests">
+        <h2>Tests</h2>
+        <p>
+          Das Projekt verwendet Jest und React Testing Library für Unit-Tests.
+        </p>
+
+        <h3>Tests ausführen</h3>
+        <pre>
+# Alle Tests ausführen
+npm test
+
+# Tests im Watch-Modus ausführen
+npm test -- --watch
+
+# Coverage-Bericht generieren
+npm test -- --coverage
+      </pre
+        >
+
+        <h3>Behebung von Testproblemen</h3>
+        <p>
+          Wenn Sie den Fehler
+          <code>TransformStream is not defined</code> erhalten:
+        </p>
+
+        <div class="warning">
+          <p>
+            Dieser Fehler tritt bei neueren MSW-Versionen in Node.js auf.
+            Mögliche Lösungen:
+          </p>
+        </div>
+
+        <pre>
+// Lösung 1: Polyfill in jest.setup.js hinzufügen
+const { ReadableStream, TransformStream, WritableStream } = require('web-streams-polyfill');
+global.ReadableStream = ReadableStream;
+global.TransformStream = TransformStream;
+global.WritableStream = WritableStream;
+
+// Lösung 2: Ältere MSW-Version verwenden
+npm install msw@^1.3.2
+      </pre
+        >
+      </section>
+
+      <section id="deployment">
+        <h2>Deployment</h2>
+        <p>So deployen Sie die Anwendung auf einem Production-Server:</p>
+
+        <pre>
+# Anwendung bauen
+npm run build
+
+# Die Dateien im 'build'-Ordner sind bereit für das Deployment
+# Sie können von einem statischen Webserver wie Nginx bereitgestellt werden
+      </pre
+        >
+
+        <h3>Umgebungsvariablen</h3>
+        <p>
+          Erstellen Sie eine <code>.env</code>-Datei im Projektroot für die
+          Konfiguration:
+        </p>
+        <pre>
+REACT_APP_API_URL=http://localhost:5000/api
+REACT_APP_STRIPE_PUBLIC_KEY=Ihr_öffentlicher_Stripe_Key
+      </pre
+        >
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 - Ecommerce Frontend - Alle Rechte vorbehalten</p>
+    </footer>
+  </body>
 </html>
-

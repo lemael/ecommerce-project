@@ -35,7 +35,38 @@ public class ApplicationDbContext : DbContext
             entity.Property(u => u.Name).IsRequired().HasMaxLength(100);
             entity.Property(u => u.Email).IsRequired().HasMaxLength(255);
             entity.Property(u => u.Password).IsRequired().HasMaxLength(255);
-            entity.HasIndex(u => u.Email).IsUnique();});
+            entity.HasIndex(u => u.Email).IsUnique();
+        });
+        modelBuilder.Entity<Bestellung>(entity =>
+        {
+            entity.ToTable("Bestellungen");
+            entity.HasKey(b => b.Id);
+            entity.Property(b => b.DateBestellung).IsRequired();
+            entity.Property(b => b.Total).HasColumnType("decimal(10,2)");
+            entity.HasOne(b => b.Kunde)
+                  .WithMany()
+                  .HasForeignKey(b => b.KundeId)
+                  .OnDelete(DeleteBehavior.Cascade);
+        });
+        modelBuilder.Entity<DetailBestellung>(entity =>
+        {
+            entity.ToTable("DetailBestellungen");
+            entity.HasKey(db => db.Id);
+            entity.Property(db => db.Menge).IsRequired();
+            entity.Property(db => db.Preis).HasColumnType("decimal(10,2)");
+            entity.HasOne(db => db.Bestellung)
+                  .WithMany()
+                  .HasForeignKey(db => db.BestellungId)
+                  .OnDelete(DeleteBehavior.Cascade);
+            entity.HasOne(db => db.Produkt)
+                  .WithMany()
+                  .HasForeignKey(db => db.ProduktId)
+                  .OnDelete(DeleteBehavior.Cascade);
+        });
+         modelBuilder.Entity<Zahlung>().HasOne(p =>
+            p.Bestellung).WithMany().HasForeignKey(p => p.BestellungId);
+
+        
     }
    
 

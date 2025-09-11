@@ -1,30 +1,62 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 interface HeaderProps {
-  showButtons?: boolean;
+  isLoggedIn?: boolean;
+  username?: string;
+  showAuthButtons?: boolean;
+  onLogout?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ showButtons = true }) => {
+const Header: React.FC<HeaderProps> = ({
+  isLoggedIn = true,
+  username,
+  showAuthButtons = true, // <-- valeur par défaut
+  onLogout,
+}) => {
   const navigate = useNavigate();
 
   return (
-    <header>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Mael Fosso Ecommerce</Link>
+    <header className="header">
+      <nav className="navbar" aria-label="Hauptnavigation">
+        <ul className="nav-list">
+          {isLoggedIn && username && (
+            <li
+              className="nav-item welcome"
+              style={{ fontWeight: "bold", color: "gold" }}
+            >
+              Willkommen, {username}
+            </li>
+          )}
+          <li className="nav-item">
+            <Link to="/">Ecommerce-Project</Link>
           </li>
-          <li>
+          <li className="nav-item">
             <Link to="/uber-uns">Über uns</Link>
           </li>
+          {isLoggedIn && (
+            <li className="nav-item">
+              <Link to="/warenkorb" aria-label="Warenkorb">
+                🛒
+              </Link>
+            </li>
+          )}
         </ul>
-        {showButtons && (
+
+        {showAuthButtons && (
           <div className="button-container">
             <button className="button" onClick={() => navigate("/connexion")}>
               Anmelden
             </button>
             <button className="button" onClick={() => navigate("/inscription")}>
               Registrieren
+            </button>
+          </div>
+        )}
+        {isLoggedIn && (
+          <div className="button-container">
+            <button className="button" onClick={() => navigate("/deconnexion")}>
+              Abmelden
             </button>
           </div>
         )}

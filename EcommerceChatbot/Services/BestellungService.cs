@@ -1,20 +1,43 @@
-public class BestellungService
+using EcommerceChatbot.Data;
+
+using Microsoft.EntityFrameworkCore;
+
+
+namespace EcommerceChatbot.Services
 {
-    private readonly BestellungContext _context;
-
-    public BestellungService(BestellungContext context)
+    public class BestellungService
     {
-        _context = context;
-    }
+        private readonly ApplicationDbContext _context;
 
-    public async Task<Bestellung> GetCommandeAsync(int id)
-    {
-        return await _context.Bestellungs.FindAsync(id);
-    }
+        public BestellungService(ApplicationDbContext context)
+        {
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+        }
 
-    public async Task CreateCommandeAsync(Bestellung commande)
-    {
-        _context.Bestellungs.Add(commande);
-        await _context.SaveChangesAsync();
+        public async Task<Bestellung> CreateBestellung(Bestellung bestellung)
+        {
+            var user = await _context.Users.FindAsync(bestellung.KundeId);
+            if (user == null)
+            {
+                throw new Exception("Utilisateur non trouvé");
+            }
+
+            //bestellung.Kunde = null;
+            bestellung.KundeId = user.Id;
+
+            _context.Bestellungen.Add(bestellung);
+            await _context.SaveChangesAsync();
+
+            return bestellung;
+        }
+
+        public async Task<Bestellung?> GetBestellung(int id)
+        {
+            return await _context.Bestellungen.FindAsync(id);
+        }
+        public async Task<List<Bestellung>> GetAllBestellungen()
+        {
+            return await _context.Bestellungen.ToListAsync();
+        }
     }
 }

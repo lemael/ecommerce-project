@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.SpaServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,13 +24,15 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowSpecificOrigin",
         policy =>
         {
-            policy.WithOrigins("https://ecommerce-project-2kvd.onrender.com/")
-          // policy.WithOrigins("http://localhost:3000")
+            // policy.WithOrigins("https://ecommerce-project-2kvd.onrender.com/")
+            policy.WithOrigins("http://localhost:3000")
                 .AllowAnyMethod()
                 .AllowAnyHeader();
         });
 });
-builder.Services.AddTransient<GeminiService>();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddTransient<BestellungService>();
+builder.Services.AddTransient<UserService>();
 builder.Services.AddHttpClient();
 
 
@@ -99,6 +102,10 @@ app.MapGet("/form", async () =>
     var html = await File.ReadAllTextAsync(filePath);
     return Results.Content(html, "text/html");
 });
+
+
+
+
 
 app.MapPost("/add-product", async (HttpRequest request, ApplicationDbContext db) =>
 {

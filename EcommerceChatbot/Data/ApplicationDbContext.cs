@@ -11,6 +11,9 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<Product> Products => Set<Product>();
      public DbSet<User> Users => Set<User>();
+    public DbSet<Bestellung> Bestellungen => Set<Bestellung>();
+    public DbSet<DetailBestellung> DetailBestellungen => Set<DetailBestellung>();
+    public DbSet<Zahlung> Zahlungen => Set<Zahlung>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -63,10 +66,10 @@ public class ApplicationDbContext : DbContext
                   .HasForeignKey(db => db.ProduktId)
                   .OnDelete(DeleteBehavior.Cascade);
         });
-         modelBuilder.Entity<Zahlung>().HasOne(p =>
-            p.Bestellung).WithMany().HasForeignKey(p => p.BestellungId);
+        modelBuilder.Entity<Zahlung>().HasOne(p =>
+           p.Bestellung).WithMany().HasForeignKey(p => p.BestellungId);
 
-        
+
     }
    
 

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "snEIgBgtutXp262MeqD4vQ/8QmQh6axc0hyPMen7yTM=",
+  "Hash": "aXcj2iCf4BrECCgz7N0qo9hjLrgSo6odtBBRWKs0mxc=",
   "Source": "EcommerceChatbot",
   "BasePath": "_content/EcommerceChatbot",
   "Mode": "Default",
@@ -169,12 +169,12 @@
       "OriginalItemSpec": "wwwroot/build/robots.txt"
     },
     {
-      "Identity": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/static/css/main.dc4d6ff2.css",
+      "Identity": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/static/css/main.99dcadf1.css",
       "SourceId": "EcommerceChatbot",
       "SourceType": "Discovered",
       "ContentRoot": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/",
       "BasePath": "_content/EcommerceChatbot",
-      "RelativePath": "build/static/css/main.dc4d6ff2.css",
+      "RelativePath": "build/static/css/main.99dcadf1.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -185,15 +185,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/build/static/css/main.dc4d6ff2.css"
+      "OriginalItemSpec": "wwwroot/build/static/css/main.99dcadf1.css"
     },
     {
-      "Identity": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/static/css/main.dc4d6ff2.css.map",
+      "Identity": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/static/css/main.99dcadf1.css.map",
       "SourceId": "EcommerceChatbot",
       "SourceType": "Discovered",
       "ContentRoot": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/",
       "BasePath": "_content/EcommerceChatbot",
-      "RelativePath": "build/static/css/main.dc4d6ff2.css.map",
+      "RelativePath": "build/static/css/main.99dcadf1.css.map",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -204,15 +204,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/build/static/css/main.dc4d6ff2.css.map"
+      "OriginalItemSpec": "wwwroot/build/static/css/main.99dcadf1.css.map"
     },
     {
-      "Identity": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/static/js/main.c52f53f9.js",
+      "Identity": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/static/js/main.e8974126.js",
       "SourceId": "EcommerceChatbot",
       "SourceType": "Discovered",
       "ContentRoot": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/",
       "BasePath": "_content/EcommerceChatbot",
-      "RelativePath": "build/static/js/main.c52f53f9.js",
+      "RelativePath": "build/static/js/main.e8974126.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -223,15 +223,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/build/static/js/main.c52f53f9.js"
+      "OriginalItemSpec": "wwwroot/build/static/js/main.e8974126.js"
     },
     {
-      "Identity": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/static/js/main.c52f53f9.js.LICENSE.txt",
+      "Identity": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/static/js/main.e8974126.js.LICENSE.txt",
       "SourceId": "EcommerceChatbot",
       "SourceType": "Discovered",
       "ContentRoot": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/",
       "BasePath": "_content/EcommerceChatbot",
-      "RelativePath": "build/static/js/main.c52f53f9.js.LICENSE.txt",
+      "RelativePath": "build/static/js/main.e8974126.js.LICENSE.txt",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -242,15 +242,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/build/static/js/main.c52f53f9.js.LICENSE.txt"
+      "OriginalItemSpec": "wwwroot/build/static/js/main.e8974126.js.LICENSE.txt"
     },
     {
-      "Identity": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/static/js/main.c52f53f9.js.map",
+      "Identity": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/static/js/main.e8974126.js.map",
       "SourceId": "EcommerceChatbot",
       "SourceType": "Discovered",
       "ContentRoot": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/",
       "BasePath": "_content/EcommerceChatbot",
-      "RelativePath": "build/static/js/main.c52f53f9.js.map",
+      "RelativePath": "build/static/js/main.e8974126.js.map",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -261,7 +261,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/build/static/js/main.c52f53f9.js.map"
+      "OriginalItemSpec": "wwwroot/build/static/js/main.e8974126.js.map"
     }
   ]
 }

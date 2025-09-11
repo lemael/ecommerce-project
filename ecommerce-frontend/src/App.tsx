@@ -5,7 +5,9 @@ import ConnexionForm from "./components/ConnexionForm";
 import HeaderWrapper from "./components/HeaderWrapper";
 import Home from "./components/Home";
 import InscriptionForm from "./components/InscriptionForm";
+import LogoutPage from "./components/LogoutPage";
 import ProductDetail from "./components/ProductDetail";
+import Warenkorb from "./components/Warenkorb";
 import {
   handleConnexionSubmit,
   handleInscriptionSubmit,
@@ -28,6 +30,8 @@ const App: React.FC<AppProps> = () => {
           path="/inscription"
           element={<InscriptionForm onSubmit={handleInscriptionSubmit} />}
         />
+        <Route path="/deconnexion" element={<LogoutPage />} />
+        <Route path="/warenkorb/" element={<Warenkorb />} />
       </Routes>
     </BrowserRouter>
   );

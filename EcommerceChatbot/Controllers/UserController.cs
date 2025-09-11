@@ -5,15 +5,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 
+
 [ApiController]
 [Route("api/[controller]")]
 public class UsersController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
+    private readonly UserService _userService;
 
-    public UsersController(ApplicationDbContext context)
+
+    public UsersController(ApplicationDbContext context, UserService userService)
     {
         _context = context;
+        _userService = userService;
     }
 
 
@@ -94,12 +98,37 @@ public class UsersController : ControllerBase
 
         return NoContent();
     }
-    
+
     // POST api/users/login
 
 
     private async Task<bool> UserExists(int id)
-  {
-    return await _context.Users.AnyAsync(e => e.Id == id);
-  }
+    {
+        return await _context.Users.AnyAsync(e => e.Id == id);
+    }
+
+    // POST api/user
+    [HttpPost("/api/user")]
+    public async Task<IActionResult> GetUser([FromBody] GetUserRequest request)
+    {
+        var user = await _userService.GetUserAsync(request.Sub);
+        if (user == null)
+        {
+            return NotFound();
+        }
+        return Ok(new { id = user.Id });
+    }
+    
+    [HttpPost("login")]
+public async Task<ActionResult> Login([FromBody]LoginModel model)
+{
+    // Logique de connexion ici
+    var user = await _userService.GetUserAsync(model.Email, model.Password);
+    if (user == null)
+    {
+        return Unauthorized();
+    }
+    // Générez un token ou une réponse de connexion réussie
+    return Ok(new { token = "votre_token" });
+}
 }

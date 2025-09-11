@@ -38,7 +38,7 @@ const ProductComponent = () => {
 const styles = {
   productsGrid: {
     display: "grid",
-    gridTemplateColumns: "repeat(3, 1fr)",
+    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
     gap: "20px",
   },
 };

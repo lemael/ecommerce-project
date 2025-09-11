@@ -27,7 +27,7 @@ public class AuthController : ControllerBase
 
         var user = new User
         {
-            Name = request.Username,
+            Name = request.Name,
             Email = request.Email,
             Password = request.Password
         };
@@ -38,17 +38,17 @@ public class AuthController : ControllerBase
         return Ok("User registered successfully");
     }
 
-    [HttpPost("login")]
-    public IActionResult Login(LoginDto request)
-    {
-        var user = _context.Users.FirstOrDefault(u => u.Email == request.Email && u.Password == request.Password);
-        if (user == null)
-            return BadRequest("Invalid email or password");
+   [HttpPost("login")]
+public IActionResult Login(LoginDto request)
+{
+    var user = _context.Users.FirstOrDefault(u => u.Email == request.Email && u.Password == request.Password);
+    if (user == null)
+        return BadRequest("Invalid email or password");
 
-        var token = CreateToken(user);
+    var token = CreateToken(user);
 
-        return Ok(new { token });
-    }
+    return Ok(new { token });
+}
 
     private string CreateToken(User user)
     {
@@ -81,4 +81,5 @@ public class AuthController : ControllerBase
 
         return Ok(new { Username = username, Email = email });
     }
+    
 }

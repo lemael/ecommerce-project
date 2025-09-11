@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Product } from "../models/Produkt";
-import handleBuy from "../services/api";
-import { ORDERS_URL, PRODUCTS_URL } from "../utils/constants";
+import handleKaufen from "../services/handleKaufen";
+import { PRODUCTS_URL } from "../utils/constants";
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const kaufen = () => {
+    handleKaufen(product);
+  };
 
   useEffect(() => {
     fetch(PRODUCTS_URL + `/${id}`)
@@ -39,15 +42,7 @@ const ProductDetail = () => {
       <p>
         <strong>Beschreibung:</strong> {product.description}
       </p>
-      <button
-        style={styles.buyButton}
-        onClick={() =>
-          handleBuy(ORDERS_URL, {
-            productId: id!,
-            quantity: 1,
-          })
-        }
-      >
+      <button style={styles.buyButton} onClick={kaufen}>
         Kaufen
       </button>
     </div>

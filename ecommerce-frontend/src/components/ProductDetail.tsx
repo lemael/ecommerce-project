@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Product } from "../models/Produkt";
 import handleKaufen from "../services/handleKaufen";
 import { PRODUCTS_URL } from "../utils/constants";
@@ -11,7 +11,8 @@ const ProductDetail = () => {
   const kaufen = () => {
     handleKaufen(product);
   };
-
+  const user = localStorage.getItem("user");
+  const navigate = useNavigate();
   useEffect(() => {
     fetch(PRODUCTS_URL + `/${id}`)
       .then((response) => {
@@ -42,8 +43,17 @@ const ProductDetail = () => {
       <p>
         <strong>Beschreibung:</strong> {product.description}
       </p>
-      <button style={styles.buyButton} onClick={kaufen}>
-        Kaufen
+      <button
+        style={styles.buyButton}
+        onClick={() => {
+          if (user) {
+            kaufen();
+          } else {
+            navigate("/connexion");
+          }
+        }}
+      >
+        {user ? "Kaufen" : "Anmelden um zu kaufen"}
       </button>
     </div>
   );

@@ -24,8 +24,8 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowSpecificOrigin",
         policy =>
         {
-            policy.WithOrigins("https://ecommerce-project-2kvd.onrender.com/")
-            //policy.WithOrigins("http://localhost:3000")
+           // policy.WithOrigins("https://ecommerce-project-2kvd.onrender.com/")
+            policy.WithOrigins("http://localhost:3000")
                 .AllowAnyMethod()
                 .AllowAnyHeader();
         });
@@ -57,7 +57,10 @@ builder.Services.AddAuthentication(options =>
 });
 builder.Services.AddControllers();
 builder.Services.AddAuthorization();
-builder.Services.AddDbContext<ApplicationDbContext>(); 
+builder.Services.AddDbContext<ApplicationDbContext>();
+
+builder.Services.AddTransient<ProductService>();
+builder.Services.AddHttpClient();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -103,7 +106,11 @@ app.MapGet("/form", async () =>
     return Results.Content(html, "text/html");
 });
 
-
+app.MapGet("/add-products-from-api", async (ProductService productService) =>
+{
+    await productService.AddProductsFromApi();
+    return Results.Ok("Produits ajoutés avec succès");
+});
 
 
 

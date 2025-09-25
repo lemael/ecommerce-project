@@ -5,6 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using EcommerceChatbot.Data;
+using EcommerceChatbot.Services;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -13,10 +14,13 @@ public class AuthController : ControllerBase
     private readonly ApplicationDbContext _context;
     private readonly IConfiguration _config;
 
-    public AuthController(ApplicationDbContext context, IConfiguration config)
+    private readonly UserService _userService;
+
+    public AuthController(ApplicationDbContext context, IConfiguration config, UserService userService)
     {
         _context = context;
         _config = config;
+        _userService = userService;
     }
 
     [HttpPost("register")]
@@ -38,17 +42,17 @@ public class AuthController : ControllerBase
         return Ok("User registered successfully");
     }
 
-   [HttpPost("login")]
-public IActionResult Login(LoginDto request)
-{
-    var user = _context.Users.FirstOrDefault(u => u.Email == request.Email && u.Password == request.Password);
-    if (user == null)
-        return BadRequest("Invalid email or password");
+    [HttpPost("login")]
+    public IActionResult Login(LoginDto request)
+    {
+        var user = _context.Users.FirstOrDefault(u => u.Email == request.Email && u.Password == request.Password);
+        if (user == null)
+            return BadRequest("Invalid email or password");
 
-    var token = CreateToken(user);
+        var token = CreateToken(user);
 
-    return Ok(new { token });
-}
+        return Ok(new { token });
+    }
 
     private string CreateToken(User user)
     {
@@ -81,5 +85,19 @@ public IActionResult Login(LoginDto request)
 
         return Ok(new { Username = username, Email = email });
     }
+    
+    [HttpGet("get-user-id-by-username/{username}")]
+  public async Task<IActionResult> GetUserIdByUsername(string username)
+  {
+    try
+    {
+      var userId = await  _userService.GetUserIdByUsernameAsync(username);
+      return Ok(userId);
+    }
+    catch (Exception ex)
+    {
+      return NotFound();
+    }
+  }
     
 }

@@ -2,13 +2,19 @@ import { Link } from "react-router-dom";
 import { Product } from "../models/Produkt";
 
 const ProductCard = ({ product }: { product: Product }) => {
+  const truncateString = (str: string, maxLength: number) => {
+    if (str.length > maxLength) {
+      return str.substring(0, maxLength) + "...";
+    }
+    return str;
+  };
   return (
     <Link
       to={`/products/${product.id}`}
       style={{ textDecoration: "none", color: "inherit" }}
     >
       <div style={styles.productCard}>
-        <h2 style={styles.productName}>{product.name}</h2>
+        <h2 style={styles.productName}>{truncateString(product.name, 20)}</h2>
         <img
           src={product.image}
           alt={product.name}
@@ -29,6 +35,8 @@ const styles = {
     backgroundColor: "#fff",
     cursor: "pointer",
     transition: "transform 0.2s ease-in-out",
+    width: "250px", // largeur fixe
+    height: "350px", // hauteur fixe
   },
   productImage: {
     width: "100%",

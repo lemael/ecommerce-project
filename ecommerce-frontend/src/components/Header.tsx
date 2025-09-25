@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import CategoryNavbar from "./CategoryNavbar";
 
 interface HeaderProps {
   isLoggedIn?: boolean;
@@ -61,6 +62,8 @@ const Header: React.FC<HeaderProps> = ({
           </div>
         )}
       </nav>
+      <hr style={{ border: "1px solid #ccc", margin: "10px 0" }} />
+      <CategoryNavbar />
     </header>
   );
 };

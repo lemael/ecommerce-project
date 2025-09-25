@@ -36,12 +36,15 @@ namespace EcommerceChatbot.Migrations
                     b.Property<int>("KundeId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(10,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("KundeId");
 
                     b.ToTable("Bestellungen", (string)null);
                 });
@@ -169,21 +172,10 @@ namespace EcommerceChatbot.Migrations
                     b.ToTable("Zahlungen");
                 });
 
-            modelBuilder.Entity("Bestellung", b =>
-                {
-                    b.HasOne("User", "Kunde")
-                        .WithMany()
-                        .HasForeignKey("KundeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Kunde");
-                });
-
             modelBuilder.Entity("DetailBestellung", b =>
                 {
                     b.HasOne("Bestellung", "Bestellung")
-                        .WithMany()
+                        .WithMany("DetailBestellungen")
                         .HasForeignKey("BestellungId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -208,6 +200,11 @@ namespace EcommerceChatbot.Migrations
                         .IsRequired();
 
                     b.Navigation("Bestellung");
+                });
+
+            modelBuilder.Entity("Bestellung", b =>
+                {
+                    b.Navigation("DetailBestellungen");
                 });
 #pragma warning restore 612, 618
         }

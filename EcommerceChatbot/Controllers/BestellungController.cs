@@ -13,13 +13,18 @@ public class BestellungController : ControllerBase
         _bestellungService = bestellungService;
     }
 
-    [HttpPost]
+    [HttpPost("create-bestellung")]
     public async Task<IActionResult> CreateBestellung(Bestellung bestellung)
     {
         var createdBestellung = await _bestellungService.CreateBestellung(bestellung);
         return CreatedAtAction(nameof(GetBestellung), new { id = createdBestellung.Id }, createdBestellung);
     }
-
+    [HttpPost("add-to-bestellung")]
+    public async Task<ActionResult> AddToBestellung(int produktId, int menge)
+    {
+        await _bestellungService.AddToBestellungAsync(produktId, menge);
+        return Ok();
+    }
     [HttpGet("{id}")]
     public async Task<IActionResult> GetBestellung(int id)
     {
@@ -36,5 +41,18 @@ public class BestellungController : ControllerBase
     {
         var bestellungen = await _bestellungService.GetAllBestellungen();
         return Ok(bestellungen);
+    }
+
+    [HttpGet("en-cours")]
+    public async Task<ActionResult<Bestellung>> GetBestellungEnCours()
+    {
+        var bestellung = await _bestellungService.GetBestellungEnCoursAsync();
+
+        if (bestellung == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(bestellung);
     }
 }

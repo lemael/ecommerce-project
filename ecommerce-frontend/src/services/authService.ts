@@ -18,6 +18,7 @@ const handleConnexionSubmit = async (data: {
     }
 
     const user = await response.json();
+    localStorage.setItem("user", JSON.stringify(user));
     localStorage.setItem("token", user.token);
     console.log("Token d'authentification stocké :", user.token);
 

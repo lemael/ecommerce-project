@@ -1,5 +1,3 @@
-// constants.ts
-/*
 // localhost
 const API_URL = "http://localhost:5045";
 const ORDERS_URL = `${API_URL}/orders`;
@@ -11,8 +9,10 @@ const ChatbotUrl = BaseUrl + "/chatbot";
 const InscriptionUrl_frontend = "http://localhost:3000/inscription";
 const AnmeldenUrl_frontend = "http://localhost:3000/connexion";
 const BESTELLEN_URL = `${API_URL}/api/bestellung`;
-*/
+const DETAILBESTELLUNG = `${API_URL}/api/detailbestellung`;
+const USER_URL = `${API_URL}/api/Auth`;
 
+/*
 // render
 const API_URL = "https://ecommerce-project-2kvd.onrender.com";
 const ORDERS_URL = `${API_URL}/orders`;
@@ -27,7 +27,9 @@ const AnmeldenUrl_frontend =
   "https://ecommerce-project-2kvd.onrender.com/connexion";
 
 const BESTELLEN_URL = `${API_URL}/api/bestellung`;
-
+const DETAILBESTELLUNG = `${API_URL}/api/detailbestellung`;
+const USER_URL = `${API_URL}/api/Auth`;
+*/
 export {
   AnmeldenUrl,
   AnmeldenUrl_frontend,
@@ -35,8 +37,10 @@ export {
   BaseUrl,
   BESTELLEN_URL,
   ChatbotUrl,
+  DETAILBESTELLUNG,
   InscriptionUrl,
   InscriptionUrl_frontend,
   ORDERS_URL,
   PRODUCTS_URL,
+  USER_URL,
 };

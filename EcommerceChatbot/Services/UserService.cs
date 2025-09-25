@@ -34,17 +34,28 @@ public class UserService
     return await _context.Users.FirstOrDefaultAsync(u => u.Name == sub);
   }
 
-public async Task<User> GetUserAsync(string email, string password)
-{
-  // Recherchez l'utilisateur par email
-  var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
-
-  if (user != null && user.Password == password)
+  public async Task<User> GetUserAsync(string email, string password)
   {
-    return user;
+    // Recherchez l'utilisateur par email
+    var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+
+    if (user != null && user.Password == password)
+    {
+      return user;
+    }
+
+    throw new Exception("Utilisateur non trouvé ou mot de passe incorrect");
   }
 
-   throw new Exception("Utilisateur non trouvé ou mot de passe incorrect");
-}
+  public async Task<string> GetUserIdByUsernameAsync(string username)
+  {
+   var user = await _context.Users.FirstOrDefaultAsync(u => u.Name == username);
+    if (user == null)
+    {
+      throw new Exception("Utilisateur non trouvé");
+    }
+    
+    return user.Id.ToString() ;
+  }
 
 }

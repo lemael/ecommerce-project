@@ -1,11 +1,10 @@
+import { DetailBestellung } from "./DetailBestellung";
 interface Bestellung {
-  KundeId: number;
-  DateBestellung: string;
-  Total: number;
-  DetailBestellungen: {
-    ProduktId: number;
-    Menge: number;
-    Preis: number;
-  }[];
+  id?: number;
+  kundeId: number;
+  total: number;
+  status?: string;
+  dateBestellung?: string;
+  detailBestellungen: DetailBestellung[];
 }
 export { Bestellung };

@@ -22,10 +22,8 @@ const BaseUrl = "https://ecommerce-project-2kvd.onrender.com/api";
 const InscriptionUrl = BaseUrl + "/users";
 const AnmeldenUrl = BaseUrl + "/auth/login";
 const ChatbotUrl = BaseUrl + "/chatbot";
-const InscriptionUrl_frontend =
-  "https://ecommerce-project-2kvd.onrender.com/inscription";
-const AnmeldenUrl_frontend =
-  "https://ecommerce-project-2kvd.onrender.com/connexion";
+const InscriptionUrl_frontend = `${API_URL}/inscription`;
+const AnmeldenUrl_frontend = `${API_URL}/connexion`;
 
 const BESTELLEN_URL = `${API_URL}/api/bestellung`;
 const DETAILBESTELLUNG = `${API_URL}/api/detailbestellung`;

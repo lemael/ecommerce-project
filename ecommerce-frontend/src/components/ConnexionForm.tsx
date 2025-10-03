@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { InscriptionUrl_frontend } from "../utils/constants";
+import { Link } from "react-router-dom";
 
 interface ConnexionFormProps {
   onSubmit: (data: { email: string; password: string }) => Promise<void>;
@@ -62,7 +62,7 @@ const ConnexionForm: React.FC<ConnexionFormProps> = ({ onSubmit }) => {
           Anmelden
         </Button>
         <p className="mt-3">
-          Noch kein Konto ? <a href={InscriptionUrl_frontend}>Inscription</a>
+          Noch kein Konto ? <Link to="/inscription">Inscription</Link>
         </p>
       </Form>
     </div>

@@ -72,10 +72,18 @@ if (app.Environment.IsDevelopment())
 }
 
 // Middleware pour servir les fichiers statiques (wwwroot)
+app.UseRouting();
+app.UseCors("AllowSpecificOrigin");
+
+
+
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.UseStaticFiles();
 app.UseHttpsRedirection();
 app.UseHttpsRedirection();
-
+app.MapFallbackToFile("index.html", new PathString("/build"));
 var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -195,13 +203,6 @@ app.MapGet("/debug", async (ApplicationDbContext db) =>
 });
 
 
-app.UseRouting();
-app.UseCors("AllowSpecificOrigin");
-
-
-
-app.UseAuthentication();
-app.UseAuthorization();
 app.MapControllers();
 app.Run();
 

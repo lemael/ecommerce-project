@@ -1,4 +1,5 @@
 // localhost
+/*
 const API_URL = "http://localhost:5045";
 const ORDERS_URL = `${API_URL}/orders`;
 const PRODUCTS_URL = `${API_URL}/products`;
@@ -11,8 +12,8 @@ const AnmeldenUrl_frontend = "http://localhost:3000/connexion";
 const BESTELLEN_URL = `${API_URL}/api/bestellung`;
 const DETAILBESTELLUNG = `${API_URL}/api/detailbestellung`;
 const USER_URL = `${API_URL}/api/Auth`;
+*/
 
-/*
 // render
 const API_URL = "https://ecommerce-project-2kvd.onrender.com";
 const ORDERS_URL = `${API_URL}/orders`;
@@ -30,7 +31,6 @@ const BESTELLEN_URL = `${API_URL}/api/bestellung`;
 const DETAILBESTELLUNG = `${API_URL}/api/detailbestellung`;
 const USER_URL = `${API_URL}/api/Auth`;
 
-*/
 export {
   AnmeldenUrl,
   AnmeldenUrl_frontend,

@@ -63,7 +63,7 @@ const Header: React.FC<HeaderProps> = ({
         )}
       </nav>
       <hr style={{ border: "1px solid #ccc", margin: "10px 0" }} />
-      <CategoryNavbar />
+      {/* <CategoryNavbar />*/}
     </header>
   );
 };

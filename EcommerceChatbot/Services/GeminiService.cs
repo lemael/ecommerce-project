@@ -5,12 +5,12 @@ using System.Text.Json;
 using System.Threading.Tasks;
 
 
-public class GeminiService
+public class OpenRouterService
 {
     private readonly HttpClient _httpClient;
     private readonly string _apiKey;
 
-    public GeminiService(HttpClient httpClient, IConfiguration config)
+    public OpenRouterService(HttpClient httpClient, IConfiguration config)
     {
         _httpClient = httpClient;
         _apiKey = config["Gemini:ApiKey"]?? throw new ArgumentNullException("Genimi:ApiKey manquant dans la configuration."); // récupère depuis variable d'environnement

@@ -20,7 +20,8 @@ const HeaderWrapper = () => {
     // Cas 2 : sur login ou register → pas de boutons + pas de username
     if (
       location.pathname === "/connexion" ||
-      location.pathname === "/inscription"
+      location.pathname === "/inscription" ||
+      location.pathname === "/inscription-reussie"
     ) {
       return <Header isLoggedIn={false} username="" showAuthButtons={false} />;
     }

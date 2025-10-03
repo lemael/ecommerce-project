@@ -31,8 +31,8 @@ builder.Services.AddCors(options =>
         });
 });
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddTransient<BestellungService>();
 builder.Services.AddTransient<UserService>();
+builder.Services.AddTransient<BestellungService>();
 builder.Services.AddHttpClient();
 
 
@@ -60,6 +60,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddDbContext<ApplicationDbContext>();
 
 builder.Services.AddTransient<ProductService>();
+builder.Services.AddTransient<OpenRouterService>();
 builder.Services.AddHttpClient();
 var app = builder.Build();
 

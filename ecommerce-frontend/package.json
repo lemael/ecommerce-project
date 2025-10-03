@@ -8,6 +8,7 @@
     "@types/axios": "^0.14.4",
     "axios": "^1.11.0",
     "bootstrap": "^5.3.7",
+    "fork-ts-checker-webpack-plugin": "^9.1.0",
     "react": "^19.1.1",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.1.1",

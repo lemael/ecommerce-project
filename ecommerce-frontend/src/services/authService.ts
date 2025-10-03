@@ -10,11 +10,23 @@ const handleConnexionSubmit = async (data: {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        email: data.email,
+        password: data.password,
+      }),
     });
 
     if (!response.ok) {
-      throw new Error(`Erreur lors de la connexion : ${response.status}`);
+      if (response.status === 400) {
+        console.log("Benutzer :", data.email);
+        console.log("Passwort :", data.password);
+        console.log("Response :", response);
+        throw new Error("Benutzer wurde nicht gefunden."); // ✅ sera affiché
+      }
+      if (response.status === 401) {
+        throw new Error("Falsches Passwort.");
+      }
+      throw new Error(`Fehler bei der Anmeldung: ${response.status}`);
     }
 
     const user = await response.json();
@@ -28,6 +40,7 @@ const handleConnexionSubmit = async (data: {
     window.location.href = "/";
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 const handleInscriptionSubmit = async (data: {
@@ -45,19 +58,23 @@ const handleInscriptionSubmit = async (data: {
     });
 
     if (!response.ok) {
-      throw new Error(`Erreur lors de l'inscription : ${response.status}`);
+      //  Ici on envoie une erreur claire au formulaire
+      throw new Error("Email oder Passwort existiert nicht.");
     }
 
     const result = await response.json();
+
     console.log(result);
     // Sauvegarder le token d'authentification dans le localStorage
     localStorage.setItem("token", result.token);
     // Rediriger l'utilisateur vers la page d'accueil
-    window.location.href = "/";
+    window.location.href = "/inscription-reussie";
     localStorage.setItem("token", result.token);
   } catch (error) {
     console.error(error);
+
     // Afficher un message d'erreur à l'utilisateur
+    throw error;
   }
 };
 

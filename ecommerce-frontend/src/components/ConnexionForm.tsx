@@ -1,18 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { InscriptionUrl_frontend } from "../utils/constants";
 
 interface ConnexionFormProps {
-  onSubmit: (data: { email: string; password: string }) => void;
+  onSubmit: (data: { email: string; password: string }) => Promise<void>;
 }
 
 const ConnexionForm: React.FC<ConnexionFormProps> = ({ onSubmit }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    console.log("Error state changed:", error);
+  }, [error]);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onSubmit({ email, password });
+
+    //  Vérif champs vides
+    if (!email || !password) {
+      setError("Bitte füllen Sie alle Felder aus."); // "Veuillez remplir tous les champs"
+      return;
+    }
+    await onSubmit({ email, password }).catch((err) => {
+      setError(err.message);
+    });
   };
 
   return (
@@ -26,6 +39,9 @@ const ConnexionForm: React.FC<ConnexionFormProps> = ({ onSubmit }) => {
         style={{ maxWidth: "400px", width: "100%" }}
       >
         <h2 className="text-center mb-4">Anmelden</h2>
+        {/* ✅ Message d'erreur */}
+        {error && <div style={{ color: "red" }}>{error}</div>}
+
         <Form.Group controlId="email" className="mb-3">
           <Form.Label>Email</Form.Label>
           <Form.Control

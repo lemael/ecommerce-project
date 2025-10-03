@@ -48,7 +48,9 @@ public class AuthController : ControllerBase
         var user = _context.Users.FirstOrDefault(u => u.Email == request.Email && u.Password == request.Password);
         if (user == null)
             return BadRequest("Invalid email or password");
-
+        Console.WriteLine("Benutzer gefunden :", user.Email);
+        Console.WriteLine("Benutzer ID :", user.Id);
+        Console.WriteLine("Benutzer Name :", _context.Users);
         var token = CreateToken(user);
 
         return Ok(new { token });

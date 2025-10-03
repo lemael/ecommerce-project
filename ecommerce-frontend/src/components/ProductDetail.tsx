@@ -10,6 +10,8 @@ const ProductDetail = () => {
   const [error, setError] = useState<string | null>(null);
   const kaufen = () => {
     handleKaufen(product);
+    // Rediriger vers /warenkorb
+    navigate("/warenkorb");
   };
   const user = localStorage.getItem("user");
   const navigate = useNavigate();
@@ -35,6 +37,9 @@ const ProductDetail = () => {
 
   return (
     <div style={styles.detailContainer}>
+      <br></br>
+      <br></br>
+      {/* Product Details */}
       <h1>{product.name}</h1>
       <img src={product.image} alt={product.name} style={styles.detailImage} />
       <p>

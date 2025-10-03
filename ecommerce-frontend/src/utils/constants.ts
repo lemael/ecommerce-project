@@ -29,6 +29,7 @@ const AnmeldenUrl_frontend =
 const BESTELLEN_URL = `${API_URL}/api/bestellung`;
 const DETAILBESTELLUNG = `${API_URL}/api/detailbestellung`;
 const USER_URL = `${API_URL}/api/Auth`;
+
 */
 export {
   AnmeldenUrl,

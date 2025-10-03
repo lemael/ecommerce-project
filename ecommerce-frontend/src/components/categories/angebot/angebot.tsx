@@ -1,11 +1,10 @@
 import React from "react";
-import Produkt from "./Produkt";
-import Chatbot from "./chatbot";
-import CategoryNavbar from "./CategoryNavbar";
+import CategoryNavbar from "../../CategoryNavbar";
+import Chatbot from "../../chatbot";
 
-interface HomeProps {}
+interface angebotProps {}
 
-const Home: React.FC<HomeProps> = () => {
+const Angebot: React.FC<angebotProps> = () => {
   return (
     <main>
       <header>
@@ -14,11 +13,10 @@ const Home: React.FC<HomeProps> = () => {
       <div className="products-grid">
         <br></br>
         <br></br>
-        <Produkt category="all" />
       </div>
       <Chatbot />
     </main>
   );
 };
 
-export default Home;
+export default Angebot;

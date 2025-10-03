@@ -1,19 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { AnmeldenUrl_frontend } from "../utils/constants";
 
 interface InscriptionFormProps {
-  onSubmit: (data: { name: string; email: string; password: string }) => void;
+  onSubmit: (data: {
+    name: string;
+    email: string;
+    password: string;
+  }) => Promise<void>;
 }
 
 const InscriptionForm: React.FC<InscriptionFormProps> = ({ onSubmit }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    console.log("Error state changed:", error);
+  }, [error]);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onSubmit({ name, email, password });
+    //  Vérif champs vides
+    if (!email || !password) {
+      setError("Bitte füllen Sie alle Felder aus."); // "Veuillez remplir tous les champs"
+      return;
+    }
+    await onSubmit({ name, email, password }).catch((err) => {
+      setError(err.message);
+    });
   };
 
   return (
@@ -27,6 +43,9 @@ const InscriptionForm: React.FC<InscriptionFormProps> = ({ onSubmit }) => {
         style={{ maxWidth: "400px", width: "100%" }}
       >
         <h2 className="text-center mb-4">Registrieren</h2>
+
+        {/* ✅ Message d'erreur */}
+        {error && <div style={{ color: "red" }}>{error}</div>}
         <Form.Group controlId="name" className="mb-3">
           <Form.Label>Nom</Form.Label>
           <Form.Control

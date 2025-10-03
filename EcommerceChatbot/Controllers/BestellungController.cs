@@ -55,4 +55,29 @@ public class BestellungController : ControllerBase
 
         return Ok(bestellung);
     }
+
+    [HttpPut("{bestellungId}/details/{detailBestellungId}/{menge}")]
+        public async Task<IActionResult> UpdateMenge(int bestellungId, int detailBestellungId, int menge)
+        {
+             Console.WriteLine("Requête PUT reçue");
+            var updated = await _bestellungService.UpdateMengeAsync(bestellungId, detailBestellungId, menge);
+             Console.WriteLine("Réponse de la méthode UpdateMenge");
+        if (updated == null)
+        {
+            Console.WriteLine("Aucune mise à jour effectuée");
+                return NotFound();
+            } 
+            Console.WriteLine("Mise à jour effectuée avec succès");
+            return Ok(updated);
+        }
+
+        [HttpDelete("{bestellungId}/details/{detailBestellungId}")]
+        public async Task<IActionResult> DeleteItem(int bestellungId, int detailBestellungId)
+        {
+            var updated = await _bestellungService.DeleteItemAsync(bestellungId, detailBestellungId);
+
+            if (updated == null) return NotFound();
+
+            return Ok(updated);
+        }
 }

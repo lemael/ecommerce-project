@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
+import Category from "../models/Category";
 import { Product } from "../models/Produkt";
 import { PRODUCTS_URL } from "../utils/constants";
 import ProductCard from "./ProductCard";
 
-const ProductComponent = () => {
+interface ProduktProps {
+  category?: Category;
+}
+
+const ProductComponent: React.FC<ProduktProps> = ({ category }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState<string | null>(null);
 
@@ -15,9 +20,19 @@ const ProductComponent = () => {
         }
         return response.json();
       })
-      .then((data) => setProducts(data))
+      .then((data) => {
+        let filteredProducts;
+        if (category === "all") {
+          filteredProducts = data;
+        } else {
+          filteredProducts = data.filter(
+            (product: Product) => product.category === category
+          );
+        }
+        setProducts(filteredProducts);
+      })
       .catch((error) => setError(error.message));
-  }, []);
+  }, [category]);
 
   if (error) {
     return <div>Erreur : {error}</div>;

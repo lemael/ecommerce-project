@@ -14,13 +14,13 @@ public class ChatBotController : ControllerBase
   
     private static List<ChatExchange> _history = new List<ChatExchange>();
 
-    // private readonly OpenRouterService _openRouterService;
-    private readonly GeminiService _geminiService;
+     private readonly OpenRouterService _openRouterService;
+    //private readonly GeminiService _geminiService;
     private readonly ApplicationDbContext _db;
 
-    public ChatBotController(GeminiService geminiService, ApplicationDbContext db)
+    public ChatBotController(OpenRouterService openRouterService, ApplicationDbContext db)
     {
-        _geminiService = geminiService;
+        _openRouterService = openRouterService;
         _db = db;
     }
 
@@ -43,7 +43,7 @@ public class ChatBotController : ControllerBase
             // Construire le prompt complet avec les produits + question
           string prompt = $"Hier ist die Liste der Produkte:\n{productList}\nBeantworte die folgende Frage: {request.Question}";
 
-            var result = await _geminiService.AskGeminiAsync(prompt);
+            var result = await _openRouterService.AskGeminiAsync(prompt);
             Console.WriteLine("Réponse finale du bot : " + result);
             Console.WriteLine("liste de produits : " + productList);
             

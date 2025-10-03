@@ -49,32 +49,22 @@ modelBuilder.Entity<Bestellung>(entity =>
     entity.Property(b => b.DateBestellung).IsRequired();
     entity.Property(b => b.Total).HasColumnType("decimal(10,2)");
 
-      entity.HasMany(b => b.DetailBestellungen)
-          .WithOne(db => db.Bestellung)
-          .HasForeignKey(db => db.BestellungId)
-          .OnDelete(DeleteBehavior.Cascade);
+    entity.HasMany(b => b.DetailBestellungen)
+        .WithOne(db => db.Bestellung)
+        .HasForeignKey(db => db.BestellungId)
+        .OnDelete(DeleteBehavior.Cascade);
 });
 
-modelBuilder.Entity<DetailBestellung>(entity =>
-{
-    entity.ToTable("DetailBestellungen");
-    entity.HasKey(db => db.Id);
-    entity.Property(db => db.Menge).IsRequired();
-    entity.Property(db => db.Preis).HasColumnType("decimal(10,2)");
-    entity.Property(db => db.BestellungId).IsRequired();
-    entity.Property(db => db.ProduktId).IsRequired();
+        modelBuilder.Entity<DetailBestellung>(entity =>
+        {
+            entity.ToTable("DetailBestellungen");
+            entity.HasKey(db => db.Id);
+            entity.Property(db => db.Menge).IsRequired();
+            entity.Property(db => db.Preis).HasColumnType("decimal(10,2)");
+            entity.Property(db => db.BestellungId).IsRequired();
+            entity.Property(db => db.ProduktId).IsRequired();
+        });
 
-      entity.HasOne(db => db.Bestellung)
-          .WithMany(b => b.DetailBestellungen)
-          .HasForeignKey(db => db.BestellungId);
-
-   entity.HasOne(db => db.Produkt)
-          .WithMany()
-          .HasForeignKey(db => db.ProduktId);
-  
-
-   
-});
         modelBuilder.Entity<Zahlung>().HasOne(p =>
            p.Bestellung).WithMany().HasForeignKey(p => p.BestellungId);
 

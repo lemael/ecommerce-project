@@ -11,6 +11,7 @@ interface UserToken {
   iat: number;
   exp: number;
 }
+
 const handleKaufen = async (produkt: Product | null) => {
   if (!produkt) {
     throw new Error("Produit ist null oder undefined");
@@ -48,6 +49,7 @@ const handleKaufen = async (produkt: Product | null) => {
       bestellung
     );
     console.log(response.data);
+
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

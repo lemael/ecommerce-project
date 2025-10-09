@@ -1,11 +1,18 @@
+import { useNavigate } from "react-router-dom";
+import React from "react";
 interface Props {
   total: number;
 }
 
 const OrderSummary = ({ total = 0 }: Props) => {
+  const navigate = useNavigate();
   if (total === 0) {
     return null;
   }
+
+  const handleCheckout = () => {
+    navigate("/lieferung");
+  };
   return (
     <div className="card shadow-sm">
       <div className="card-body">
@@ -23,7 +30,9 @@ const OrderSummary = ({ total = 0 }: Props) => {
           <span>Summe</span>
           <span>{total.toFixed(2)} €</span>
         </p>
-        <button className="btn btn-dark w-100 mt-3">Zur Kasse gehen</button>
+        <button className="btn btn-dark w-100 mt-3" onClick={handleCheckout}>
+          Zur Kasse gehen
+        </button>
 
         <div className="mt-3 text-center">
           <img

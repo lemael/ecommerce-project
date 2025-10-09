@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { Link } from 'react-router-dom';
-import { AnmeldenUrl_frontend } from "../utils/constants";
+import { Link } from "react-router-dom";
 
 interface InscriptionFormProps {
   onSubmit: (data: {
@@ -43,6 +42,8 @@ const InscriptionForm: React.FC<InscriptionFormProps> = ({ onSubmit }) => {
         className="p-3"
         style={{ maxWidth: "400px", width: "100%" }}
       >
+        <br></br>
+
         <h2 className="text-center mb-4">Registrieren</h2>
 
         {/* ✅ Message d'erreur */}
@@ -71,11 +72,14 @@ const InscriptionForm: React.FC<InscriptionFormProps> = ({ onSubmit }) => {
             onChange={(event) => setPassword(event.target.value)}
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="dark" type="submit">
           Inscription
         </Button>
         <p className="mt-3">
-          Haben Sie bereits ein Konto? <Link to="/connexion">Login</Link>
+          Haben Sie bereits ein Konto?{" "}
+          <Link className="text-dark" to="/connexion">
+            Login
+          </Link>
         </p>
       </Form>
     </div>

@@ -25,7 +25,7 @@ builder.Services.AddCors(options =>
         policy =>
         {
             policy.WithOrigins("https://ecommerce-project-2kvd.onrender.com/")
-           // policy.WithOrigins("http://localhost:3000")
+          // policy.WithOrigins("http://localhost:3000")
                 .AllowAnyMethod()
                 .AllowAnyHeader();
         });

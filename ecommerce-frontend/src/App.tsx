@@ -15,6 +15,9 @@ import InscriptionReussie from "./components/InscriptionReussie";
 import LogoutPage from "./components/LogoutPage";
 import ProductDetail from "./components/ProductDetail";
 import Warenkorb from "./components/warenkorb/Warenkorb";
+import LieferungForm from "./components/zahlung/LieferungForm";
+import ZahlungForm from "./components/zahlung/ZahlungForm";
+
 import {
   handleConnexionSubmit,
   handleInscriptionSubmit,
@@ -23,6 +26,7 @@ import {
 interface AppProps {}
 
 const App: React.FC<AppProps> = () => {
+  // const navigate = useNavigate();
   return (
     <BrowserRouter>
       <HeaderWrapper />
@@ -46,6 +50,9 @@ const App: React.FC<AppProps> = () => {
         <Route path="/accessoires" element={<Accessories />} />
         <Route path="/inscription-reussie" element={<InscriptionReussie />} />
         <Route path="/angebot" element={<Angebot />} />
+
+        <Route path="/lieferung" element={<LieferungForm />} />
+        <Route path="/zahlungForm" element={<ZahlungForm />} />
       </Routes>
     </BrowserRouter>
   );

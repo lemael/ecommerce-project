@@ -15,47 +15,37 @@ const ProductComponent: React.FC<ProduktProps> = ({ category }) => {
   useEffect(() => {
     fetch(PRODUCTS_URL)
       .then((response) => {
-        if (!response.ok) {
+        if (!response.ok)
           throw new Error(`HTTP error! status: ${response.status}`);
-        }
         return response.json();
       })
       .then((data) => {
-        let filteredProducts;
-        if (category === "all") {
-          filteredProducts = data;
-        } else {
-          filteredProducts = data.filter(
-            (product: Product) => product.category === category
-          );
-        }
+        const filteredProducts =
+          category === "all"
+            ? data
+            : data.filter((product: Product) => product.category === category);
         setProducts(filteredProducts);
       })
       .catch((error) => setError(error.message));
   }, [category]);
 
-  if (error) {
-    return <div>Erreur : {error}</div>;
-  }
+  if (error)
+    return <div className="text-danger text-center mt-3">Erreur : {error}</div>;
 
   return (
-    <div style={styles.productsGrid}>
-      {Array.isArray(products) &&
-        products.map((product) => (
-          <div key={product.id}>
+    <div className="container py-4">
+      <div className="row g-4">
+        {products.map((product) => (
+          <div
+            key={product.id}
+            className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center"
+          >
             <ProductCard product={product} />
           </div>
         ))}
+      </div>
     </div>
   );
-};
-
-const styles = {
-  productsGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-    gap: "20px",
-  },
 };
 
 export default ProductComponent;

@@ -58,11 +58,14 @@ const ConnexionForm: React.FC<ConnexionFormProps> = ({ onSubmit }) => {
             onChange={(event) => setPassword(event.target.value)}
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="dark" type="submit">
           Anmelden
         </Button>
         <p className="mt-3">
-          Noch kein Konto ? <Link to="/inscription">Inscription</Link>
+          Noch kein Konto ?{" "}
+          <Link className="text-dark" to="/inscription">
+            Inscription
+          </Link>
         </p>
       </Form>
     </div>

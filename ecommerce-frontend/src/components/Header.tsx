@@ -1,6 +1,11 @@
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { Dropdown } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import CategoryNavbar from "./CategoryNavbar";
+import SearchBar from "./SearchBar";
+// import CategoryNavbar from "./CategoryNavbar";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
 interface HeaderProps {
   isLoggedIn?: boolean;
@@ -22,23 +27,56 @@ const Header: React.FC<HeaderProps> = ({
       <nav className="navbar" aria-label="Hauptnavigation">
         <ul className="nav-list">
           {isLoggedIn && username && (
-            <li
-              className="nav-item welcome"
-              style={{ fontWeight: "bold", color: "gold" }}
-            >
-              Willkommen, {username}
-            </li>
+            <>
+              <li
+                className="d-none d-md-block nav-item welcome"
+                style={{
+                  fontWeight: "bold",
+                  color: "gold",
+                  left: "120px",
+                  position: "absolute",
+                }}
+              >
+                Willkommen, {username}
+              </li>
+              <li className="nav-item">
+                <SearchBar />
+              </li>
+            </>
           )}
-          <li className="nav-item">
-            <Link to="/">Ecommerce-Project</Link>
+          <li
+            className="d-none d-md-block nav-item position-absolute"
+            style={{
+              left: "50px", // valeur par défaut
+            }}
+            // pour les grands appareils
+          >
+            <Link to="/">E-Shop</Link>
           </li>
+
+          <li
+            className="d-block d-md-none nav-item position-absolute"
+            style={{
+              left: "20px", // valeur pour les petits appareils
+            }}
+          >
+            <Link to="/">E-Shop</Link>
+          </li>
+          {/*}
           <li className="nav-item">
             <Link to="/uber-uns">Über uns</Link>
           </li>
-          {isLoggedIn && (
+          */}
+
+          {showAuthButtons && (
             <li className="nav-item">
+              <SearchBar />
+            </li>
+          )}
+          {isLoggedIn && (
+            <li className="nav-item" style={{ marginLeft: "100px" }}>
               <Link to="/warenkorb" aria-label="Warenkorb">
-                🛒
+                <FontAwesomeIcon icon={faShoppingCart} />
               </Link>
             </li>
           )}
@@ -46,20 +84,36 @@ const Header: React.FC<HeaderProps> = ({
 
         {showAuthButtons && (
           <div className="button-container">
-            <button className="button" onClick={() => navigate("/connexion")}>
-              Anmelden
-            </button>
-            <button className="button" onClick={() => navigate("/inscription")}>
-              Registrieren
+            <button
+              style={{
+                border: "none",
+                backgroundColor: "transparent",
+                outline: "none",
+              }}
+              className="button"
+              onClick={() => navigate("/connexion")}
+            >
+              <FontAwesomeIcon icon={faUser} style={{ marginRight: "10px" }} />
             </button>
           </div>
         )}
         {isLoggedIn && (
-          <div className="button-container">
-            <button className="button" onClick={() => navigate("/deconnexion")}>
-              Abmelden
-            </button>
-          </div>
+          <Dropdown>
+            <Dropdown.Toggle
+              style={{
+                border: "none",
+                backgroundColor: "transparent",
+                outline: "none",
+              }}
+            >
+              <FontAwesomeIcon icon={faUser} style={{ marginRight: "10px" }} />
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={() => navigate("/deconnexion")}>
+                Abmelden
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         )}
       </nav>
       <hr style={{ border: "1px solid #ccc", margin: "10px 0" }} />

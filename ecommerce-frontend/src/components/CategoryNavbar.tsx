@@ -3,16 +3,7 @@ import { Link } from "react-router-dom";
 
 const CategoryNavbar = () => {
   return (
-    <nav
-      className="navbar navbar-expand-lg navbar-light bg-light"
-      style={{
-        position: "fixed",
-        top: "60px",
-        left: "0",
-        width: "100%",
-        zIndex: "1000",
-      }}
-    >
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
         <button
           className="navbar-toggler"

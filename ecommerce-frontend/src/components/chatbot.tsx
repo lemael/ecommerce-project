@@ -1,6 +1,5 @@
-// src/components/ChatBot.tsx
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ChatbotUrl } from "../utils/constants";
 
 type Message = {
@@ -12,20 +11,27 @@ const ChatBot: React.FC = () => {
   const [question, setQuestion] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Détecte automatiquement si on est sur un smartphone
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 600);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const askQuestion = async () => {
     if (!question.trim()) return;
-
     setMessages((prev) => [...prev, { text: question, sender: "user" }]);
 
     try {
       const response = await axios.post(ChatbotUrl, { question });
-
       setMessages((prev) => [
         ...prev,
         { text: response.data.answer, sender: "bot" },
       ]);
-    } catch (error) {
+    } catch {
       setMessages((prev) => [
         ...prev,
         { text: "Erreur de connexion au chatbot.", sender: "bot" },
@@ -37,7 +43,7 @@ const ChatBot: React.FC = () => {
 
   return (
     <div>
-      {/* Bouton flottant en bas à droite */}
+      {/* Bouton flottant */}
       {!isOpen && (
         <button style={styles.fab} onClick={() => setIsOpen(true)}>
           💬
@@ -46,9 +52,14 @@ const ChatBot: React.FC = () => {
 
       {/* Fenêtre du chatbot */}
       {isOpen && (
-        <div style={styles.chatWindow}>
+        <div
+          style={{
+            ...styles.chatWindow,
+            ...(isMobile ? styles.chatWindowMobile : {}),
+          }}
+        >
           <div style={styles.header}>
-            <span>🛒 Chatbot e-commerce</span>
+            <span>Chatbot </span>
             <button style={styles.closeButton} onClick={() => setIsOpen(false)}>
               ✖
             </button>
@@ -62,7 +73,7 @@ const ChatBot: React.FC = () => {
                   ...styles.message,
                   alignSelf: msg.sender === "user" ? "flex-end" : "flex-start",
                   backgroundColor:
-                    msg.sender === "user" ? "#d1e7dd" : "#f8d7da",
+                    msg.sender === "user" ? "#d1e7dd" : "#e2e3e5",
                 }}
               >
                 <strong>{msg.sender === "user" ? "Vous" : "Bot"}:</strong>{" "}
@@ -77,11 +88,11 @@ const ChatBot: React.FC = () => {
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && askQuestion()}
-              placeholder="Posez une question..."
+              placeholder="Stellen Sie Ihre Frage..."
               style={styles.input}
             />
             <button onClick={askQuestion} style={styles.button}>
-              Envoyer
+              Send
             </button>
           </div>
         </div>
@@ -90,6 +101,7 @@ const ChatBot: React.FC = () => {
   );
 };
 
+// ✅ Styles adaptatifs
 const styles: { [key: string]: React.CSSProperties } = {
   fab: {
     position: "fixed",
@@ -99,11 +111,12 @@ const styles: { [key: string]: React.CSSProperties } = {
     height: "60px",
     borderRadius: "50%",
     border: "none",
-    backgroundColor: "#28a745",
+    backgroundColor: "#e6edf5ff",
     color: "#fff",
-    fontSize: "24px",
+    fontSize: "28px",
     cursor: "pointer",
-    boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+    boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
+    zIndex: 9999,
   },
   chatWindow: {
     position: "fixed",
@@ -113,20 +126,31 @@ const styles: { [key: string]: React.CSSProperties } = {
     height: "450px",
     border: "1px solid #ccc",
     borderRadius: "12px",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
     backgroundColor: "#fff",
     display: "flex",
     flexDirection: "column",
     overflow: "hidden",
     fontFamily: "Arial, sans-serif",
+    zIndex: 9999,
+  },
+  // 👇 Style appliqué automatiquement sur smartphone
+  chatWindowMobile: {
+    width: "100vw",
+    height: "100vh",
+    bottom: "0",
+    right: "0",
+    borderRadius: "0",
+    border: "none",
   },
   header: {
-    backgroundColor: "#007bff",
+    backgroundColor: "#181a1dff",
     color: "#fff",
     padding: "10px",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    fontWeight: "bold",
   },
   closeButton: {
     background: "transparent",
@@ -142,18 +166,21 @@ const styles: { [key: string]: React.CSSProperties } = {
     gap: "8px",
     padding: "10px",
     overflowY: "auto",
-    backgroundColor: "#f9f9f9",
+    backgroundColor: "#f8f9fa",
   },
   message: {
     maxWidth: "80%",
     padding: "8px 12px",
     borderRadius: "8px",
+    fontSize: "14px",
+    wordBreak: "break-word",
   },
   inputArea: {
     display: "flex",
     gap: "8px",
     padding: "10px",
     borderTop: "1px solid #ddd",
+    backgroundColor: "#fff",
   },
   input: {
     flex: 1,
@@ -165,9 +192,10 @@ const styles: { [key: string]: React.CSSProperties } = {
     padding: "8px 12px",
     borderRadius: "6px",
     border: "none",
-    backgroundColor: "#007bff",
+    backgroundColor: "#1b1d1fff",
     color: "#fff",
     cursor: "pointer",
+    fontWeight: "bold",
   },
 };
 

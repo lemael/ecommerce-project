@@ -83,7 +83,7 @@ app.UseAuthorization();
 app.UseStaticFiles();
 app.UseHttpsRedirection();
 app.UseHttpsRedirection();
-app.MapFallbackToFile("index.html", new PathString("/build"));
+
 var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -94,6 +94,7 @@ app.MapGet("/", async () =>
     var html = await File.ReadAllTextAsync(filePath);
     return Results.Content(html, "text/html");
 });
+app.MapFallbackToFile("index.html");
 app.MapGet("/weatherforecast", () =>
 {
     var forecast =  Enumerable.Range(1, 5).Select(index =>

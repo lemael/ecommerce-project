@@ -60,4 +60,27 @@ public class ProductController : ControllerBase
             return BadRequest(new { message = ex.Message });
         }
     }
+
+    [HttpPut("{id:int}")]
+    public async Task<IActionResult> UpdateProduct(
+        int id,
+        [FromBody] Product product)
+    {
+        var existingProduct = await _productService.GetByIdAsync(id);
+
+        if (existingProduct == null)
+            return NotFound(new { message = "Produit introuvable." });
+
+        product.Id = id;
+
+        try
+        {
+            await _productService.UpdateAsync(product);
+            return Ok(product);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
+    }
 }

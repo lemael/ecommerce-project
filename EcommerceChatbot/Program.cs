@@ -9,7 +9,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Newtonsoft.Json;
 
-DotNetEnv.Env.Load();
+using DotNetEnv;
+
+Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,19 +22,25 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
 var dbProvider = builder.Configuration["DB_PROVIDER"] ?? "PostgreSQL";
+
+var connectionString =
+    builder.Configuration.GetConnectionString("DefaultConnection");
+
+if (string.IsNullOrWhiteSpace(connectionString))
+{
+    throw new InvalidOperationException(
+        "ConnectionStrings:DefaultConnection n'est pas configurée.");
+}
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-     if (dbProvider.Equals(
-        "SQLite",
-        StringComparison.OrdinalIgnoreCase))
+    if (dbProvider.Equals("SQLite", StringComparison.OrdinalIgnoreCase))
     {
-        options.UseSqlite(
-            builder.Configuration.GetConnectionString("DefaultConnection"));
+        options.UseSqlite(connectionString);
     }
     else
     {
-        options.UseNpgsql(
-            builder.Configuration.GetConnectionString("DefaultConnection"));
+        options.UseNpgsql(connectionString);
     }
 });
 builder.Services.AddCors(options =>
@@ -119,19 +127,13 @@ app.UseAuthorization();
 
 app.UseStaticFiles();
 app.UseHttpsRedirection();
-app.UseHttpsRedirection();
 
 var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
-app.MapGet("/", async () =>
-{
-    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/build", "index.html");
-    var html = await File.ReadAllTextAsync(filePath);
-    return Results.Content(html, "text/html");
-});
-app.MapFallbackToFile("index.html");
+app.MapGet("/", () => Results.Ok("OK"));
+app.MapGet("/health", () => Results.Ok("OK"));
 app.MapGet("/weatherforecast", () =>
 {
     var forecast =  Enumerable.Range(1, 5).Select(index =>

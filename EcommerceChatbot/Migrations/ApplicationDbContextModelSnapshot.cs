@@ -17,6 +17,7 @@ namespace EcommerceChatbot.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("ecommerce")
                 .HasAnnotation("ProductVersion", "9.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
@@ -46,7 +47,7 @@ namespace EcommerceChatbot.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Bestellungen", (string)null);
+                    b.ToTable("Bestellungen", "ecommerce");
                 });
 
             modelBuilder.Entity("DetailBestellung", b =>
@@ -75,7 +76,7 @@ namespace EcommerceChatbot.Migrations
 
                     b.HasIndex("ProduktId");
 
-                    b.ToTable("DetailBestellungen", (string)null);
+                    b.ToTable("DetailBestellungen", "ecommerce");
                 });
 
             modelBuilder.Entity("EcommerceChatbot.Models.Product", b =>
@@ -114,7 +115,7 @@ namespace EcommerceChatbot.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products", "ecommerce");
                 });
 
             modelBuilder.Entity("User", b =>
@@ -145,7 +146,7 @@ namespace EcommerceChatbot.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users", "ecommerce");
                 });
 
             modelBuilder.Entity("Zahlung", b =>
@@ -169,7 +170,7 @@ namespace EcommerceChatbot.Migrations
 
                     b.HasIndex("BestellungId");
 
-                    b.ToTable("Zahlungen");
+                    b.ToTable("Zahlungen", "ecommerce");
                 });
 
             modelBuilder.Entity("DetailBestellung", b =>

@@ -17,6 +17,9 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+
+      modelBuilder.HasDefaultSchema("ecommerce");
         modelBuilder.Entity<Product>(entity =>
         {
             entity.ToTable("Products");
@@ -40,20 +43,20 @@ public class ApplicationDbContext : DbContext
             entity.Property(u => u.Password).IsRequired().HasMaxLength(255);
             entity.HasIndex(u => u.Email).IsUnique();
         });
-modelBuilder.Entity<Bestellung>(entity =>
-{
-    entity.ToTable("Bestellungen");
-    entity.HasKey(b => b.Id);
-    entity.Property(b => b.KundeId).IsRequired();
-    entity.Property(b => b.Status).IsRequired().HasMaxLength(50);
-    entity.Property(b => b.DateBestellung).IsRequired();
-    entity.Property(b => b.Total).HasColumnType("decimal(10,2)");
+        modelBuilder.Entity<Bestellung>(entity =>
+        {
+            entity.ToTable("Bestellungen");
+            entity.HasKey(b => b.Id);
+            entity.Property(b => b.KundeId).IsRequired();
+            entity.Property(b => b.Status).IsRequired().HasMaxLength(50);
+            entity.Property(b => b.DateBestellung).IsRequired();
+            entity.Property(b => b.Total).HasColumnType("decimal(10,2)");
 
-    entity.HasMany(b => b.DetailBestellungen)
-        .WithOne(db => db.Bestellung)
-        .HasForeignKey(db => db.BestellungId)
-        .OnDelete(DeleteBehavior.Cascade);
-});
+            entity.HasMany(b => b.DetailBestellungen)
+                .WithOne(db => db.Bestellung)
+                .HasForeignKey(db => db.BestellungId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
 
         modelBuilder.Entity<DetailBestellung>(entity =>
         {

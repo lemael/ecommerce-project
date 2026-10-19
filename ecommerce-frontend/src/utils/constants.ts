@@ -15,10 +15,11 @@ const USER_URL = `${API_URL}/api/Auth`;
 */
 
 // render
-const API_URL = "https://ecommerce-project-2kvd.onrender.com";
+const API_URL =
+  process.env.REACT_APP_API_URL || "https://ecommerce-project-2kvd.onrender.com";
 const ORDERS_URL = `${API_URL}/orders`;
 const PRODUCTS_URL = `${API_URL}/products`;
-const BaseUrl = "https://ecommerce-project-2kvd.onrender.com/api";
+const BaseUrl = `${API_URL}/api`;
 const InscriptionUrl = BaseUrl + "/users";
 const AnmeldenUrl = BaseUrl + "/auth/login";
 const ChatbotUrl = BaseUrl + "/chatbot";

@@ -1,8 +1,12 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcommerceChatbot", "EcommerceChatbot\EcommerceChatbot.csproj", "{AB304815-C47B-2D23-6990-A43D8793095B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EcommerceChatbot", "EcommerceChatbot", "{7B1C5557-99B5-4B0B-B4B9-A42A93726F5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcommerceChatbot.Tests", "EcommerceChatbot\EcommerceChatbot.Tests\EcommerceChatbot.Tests.csproj", "{C1A99B1E-F275-4493-95C2-7832CAF11737}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,11 +18,19 @@ Global
 		{AB304815-C47B-2D23-6990-A43D8793095B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB304815-C47B-2D23-6990-A43D8793095B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB304815-C47B-2D23-6990-A43D8793095B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1A99B1E-F275-4493-95C2-7832CAF11737}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1A99B1E-F275-4493-95C2-7832CAF11737}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1A99B1E-F275-4493-95C2-7832CAF11737}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1A99B1E-F275-4493-95C2-7832CAF11737}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {65043F6C-00A4-4672-B36A-BA8DEC447C67}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AB304815-C47B-2D23-6990-A43D8793095B} = {7B1C5557-99B5-4B0B-B4B9-A42A93726F5A}
+		{C1A99B1E-F275-4493-95C2-7832CAF11737} = {7B1C5557-99B5-4B0B-B4B9-A42A93726F5A}
 	EndGlobalSection
 EndGlobal

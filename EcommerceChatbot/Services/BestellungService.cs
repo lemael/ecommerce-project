@@ -1,5 +1,5 @@
 using EcommerceChatbot.Data;
-
+using EcommerceChatbot.Models;
 using Microsoft.EntityFrameworkCore;
 
 

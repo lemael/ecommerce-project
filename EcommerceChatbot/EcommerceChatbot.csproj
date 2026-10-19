@@ -28,6 +28,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.14.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.0" />
+    <Compile Remove="EcommerceChatbot.Tests/**/*.cs" />
+    <Content Remove="EcommerceChatbot.Tests/**" />
+    <EmbeddedResource Remove="EcommerceChatbot.Tests/**" />
+    <None Remove="EcommerceChatbot.Tests/**" />
   </ItemGroup>
 
 </Project>

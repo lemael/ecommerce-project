@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "xZMIU+WoIye/iRcKhPx283VLw7IgpYJPPBXIXbMmRek=",
+  "Hash": "NyZ8tv+gDcKGPyeNj0DSorodjVf00w6JrqegrBHpcWY=",
   "Source": "EcommerceChatbot",
   "BasePath": "_content/EcommerceChatbot",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "EcommerceChatbot/wwwroot",
       "Source": "EcommerceChatbot",
-      "ContentRoot": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/",
+      "ContentRoot": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/",
       "BasePath": "_content/EcommerceChatbot",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/add-product.html",
+      "Identity": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/add-product.html",
       "SourceId": "EcommerceChatbot",
       "SourceType": "Discovered",
-      "ContentRoot": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/",
+      "ContentRoot": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/",
       "BasePath": "_content/EcommerceChatbot",
       "RelativePath": "add-product.html",
       "AssetKind": "All",
@@ -36,10 +36,10 @@
       "OriginalItemSpec": "wwwroot/add-product.html"
     },
     {
-      "Identity": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/asset-manifest.json",
+      "Identity": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/build/asset-manifest.json",
       "SourceId": "EcommerceChatbot",
       "SourceType": "Discovered",
-      "ContentRoot": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/",
+      "ContentRoot": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/",
       "BasePath": "_content/EcommerceChatbot",
       "RelativePath": "build/asset-manifest.json",
       "AssetKind": "All",
@@ -55,10 +55,10 @@
       "OriginalItemSpec": "wwwroot/build/asset-manifest.json"
     },
     {
-      "Identity": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/favicon.ico",
+      "Identity": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/build/favicon.ico",
       "SourceId": "EcommerceChatbot",
       "SourceType": "Discovered",
-      "ContentRoot": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/",
+      "ContentRoot": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/",
       "BasePath": "_content/EcommerceChatbot",
       "RelativePath": "build/favicon.ico",
       "AssetKind": "All",
@@ -74,10 +74,10 @@
       "OriginalItemSpec": "wwwroot/build/favicon.ico"
     },
     {
-      "Identity": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/index.html",
+      "Identity": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/build/index.html",
       "SourceId": "EcommerceChatbot",
       "SourceType": "Discovered",
-      "ContentRoot": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/",
+      "ContentRoot": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/",
       "BasePath": "_content/EcommerceChatbot",
       "RelativePath": "build/index.html",
       "AssetKind": "All",
@@ -93,10 +93,10 @@
       "OriginalItemSpec": "wwwroot/build/index.html"
     },
     {
-      "Identity": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/logo192.png",
+      "Identity": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/build/logo192.png",
       "SourceId": "EcommerceChatbot",
       "SourceType": "Discovered",
-      "ContentRoot": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/",
+      "ContentRoot": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/",
       "BasePath": "_content/EcommerceChatbot",
       "RelativePath": "build/logo192.png",
       "AssetKind": "All",
@@ -112,10 +112,10 @@
       "OriginalItemSpec": "wwwroot/build/logo192.png"
     },
     {
-      "Identity": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/logo512.png",
+      "Identity": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/build/logo512.png",
       "SourceId": "EcommerceChatbot",
       "SourceType": "Discovered",
-      "ContentRoot": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/",
+      "ContentRoot": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/",
       "BasePath": "_content/EcommerceChatbot",
       "RelativePath": "build/logo512.png",
       "AssetKind": "All",
@@ -131,10 +131,10 @@
       "OriginalItemSpec": "wwwroot/build/logo512.png"
     },
     {
-      "Identity": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/manifest.json",
+      "Identity": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/build/manifest.json",
       "SourceId": "EcommerceChatbot",
       "SourceType": "Discovered",
-      "ContentRoot": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/",
+      "ContentRoot": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/",
       "BasePath": "_content/EcommerceChatbot",
       "RelativePath": "build/manifest.json",
       "AssetKind": "All",
@@ -150,10 +150,10 @@
       "OriginalItemSpec": "wwwroot/build/manifest.json"
     },
     {
-      "Identity": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/robots.txt",
+      "Identity": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/build/robots.txt",
       "SourceId": "EcommerceChatbot",
       "SourceType": "Discovered",
-      "ContentRoot": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/",
+      "ContentRoot": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/",
       "BasePath": "_content/EcommerceChatbot",
       "RelativePath": "build/robots.txt",
       "AssetKind": "All",
@@ -169,10 +169,10 @@
       "OriginalItemSpec": "wwwroot/build/robots.txt"
     },
     {
-      "Identity": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/static/css/main.99dcadf1.css",
+      "Identity": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/build/static/css/main.99dcadf1.css",
       "SourceId": "EcommerceChatbot",
       "SourceType": "Discovered",
-      "ContentRoot": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/",
+      "ContentRoot": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/",
       "BasePath": "_content/EcommerceChatbot",
       "RelativePath": "build/static/css/main.99dcadf1.css",
       "AssetKind": "All",
@@ -188,10 +188,10 @@
       "OriginalItemSpec": "wwwroot/build/static/css/main.99dcadf1.css"
     },
     {
-      "Identity": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/static/css/main.99dcadf1.css.map",
+      "Identity": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/build/static/css/main.99dcadf1.css.map",
       "SourceId": "EcommerceChatbot",
       "SourceType": "Discovered",
-      "ContentRoot": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/",
+      "ContentRoot": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/",
       "BasePath": "_content/EcommerceChatbot",
       "RelativePath": "build/static/css/main.99dcadf1.css.map",
       "AssetKind": "All",
@@ -207,10 +207,10 @@
       "OriginalItemSpec": "wwwroot/build/static/css/main.99dcadf1.css.map"
     },
     {
-      "Identity": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/static/js/main.a586506a.js",
+      "Identity": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/build/static/js/main.a586506a.js",
       "SourceId": "EcommerceChatbot",
       "SourceType": "Discovered",
-      "ContentRoot": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/",
+      "ContentRoot": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/",
       "BasePath": "_content/EcommerceChatbot",
       "RelativePath": "build/static/js/main.a586506a.js",
       "AssetKind": "All",
@@ -226,10 +226,10 @@
       "OriginalItemSpec": "wwwroot/build/static/js/main.a586506a.js"
     },
     {
-      "Identity": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/static/js/main.a586506a.js.LICENSE.txt",
+      "Identity": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/build/static/js/main.a586506a.js.LICENSE.txt",
       "SourceId": "EcommerceChatbot",
       "SourceType": "Discovered",
-      "ContentRoot": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/",
+      "ContentRoot": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/",
       "BasePath": "_content/EcommerceChatbot",
       "RelativePath": "build/static/js/main.a586506a.js.LICENSE.txt",
       "AssetKind": "All",
@@ -245,10 +245,10 @@
       "OriginalItemSpec": "wwwroot/build/static/js/main.a586506a.js.LICENSE.txt"
     },
     {
-      "Identity": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/build/static/js/main.a586506a.js.map",
+      "Identity": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/build/static/js/main.a586506a.js.map",
       "SourceId": "EcommerceChatbot",
       "SourceType": "Discovered",
-      "ContentRoot": "/home/mael/Dokumente/project/ecommerce-project/EcommerceChatbot/wwwroot/",
+      "ContentRoot": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/",
       "BasePath": "_content/EcommerceChatbot",
       "RelativePath": "build/static/js/main.a586506a.js.map",
       "AssetKind": "All",
@@ -262,6 +262,63 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/build/static/js/main.a586506a.js.map"
+    },
+    {
+      "Identity": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/build/static/js/main.af3d8071.js",
+      "SourceId": "EcommerceChatbot",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/",
+      "BasePath": "_content/EcommerceChatbot",
+      "RelativePath": "build/static/js/main.af3d8071.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/build/static/js/main.af3d8071.js"
+    },
+    {
+      "Identity": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/build/static/js/main.af3d8071.js.LICENSE.txt",
+      "SourceId": "EcommerceChatbot",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/",
+      "BasePath": "_content/EcommerceChatbot",
+      "RelativePath": "build/static/js/main.af3d8071.js.LICENSE.txt",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/build/static/js/main.af3d8071.js.LICENSE.txt"
+    },
+    {
+      "Identity": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/build/static/js/main.af3d8071.js.map",
+      "SourceId": "EcommerceChatbot",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/wwwroot/",
+      "BasePath": "_content/EcommerceChatbot",
+      "RelativePath": "build/static/js/main.af3d8071.js.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/build/static/js/main.af3d8071.js.map"
     }
   ]
 }

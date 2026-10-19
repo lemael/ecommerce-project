@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using EcommerceChatbot.Data;
 using EcommerceChatbot.Services;
+using EcommerceChatbot.Models;
 
 [ApiController]
 [Route("api/[controller]")]

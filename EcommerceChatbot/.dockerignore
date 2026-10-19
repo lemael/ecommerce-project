@@ -1,0 +1,8 @@
+**/bin/
+**/obj/
+EcommerceChatbot.Tests/
+.env
+.vscode/
+Dockerfile
+.dockerignore
+docker-compose.yml

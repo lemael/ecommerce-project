@@ -47,29 +47,13 @@ public class ProductController : ControllerBase
 
     // POST: /api/products
     [HttpPost]
-    [Consumes("application/x-www-form-urlencoded")]
-    public async Task<IActionResult> AddProduct(
-        [FromForm] string name,
-        [FromForm] decimal price,
-        [FromForm] string description,
-        [FromForm] string category,
-        [FromForm] string image,
-        [FromForm] int quantity)
+    [Consumes("application/json")]
+    public async Task<IActionResult> AddProduct([FromBody] Product product)
     {
-        var product = new Product
-        {
-            Name = name,
-            Price = price,
-            Description = description,
-            Category = category,
-            Image = image,
-            Quantity = quantity
-        };
-
         try
         {
             await _productService.AddAsync(product);
-            return Ok("Produit ajouté !");
+            return Ok(new { message = "Produit ajouté !", product });
         }
         catch (ArgumentException ex)
         {

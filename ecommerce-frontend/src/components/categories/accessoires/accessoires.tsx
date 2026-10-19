@@ -14,7 +14,7 @@ const Accessories: React.FC<accessoriesProps> = () => {
       <div className="products-grid">
         <br></br>
         <br></br>
-        <Produkt category="jewelery" />
+        <Produkt category="accessoires" />
       </div>
       <Chatbot />
     </main>

@@ -1,7 +1,9 @@
 type Category =
+  | "neue_waren"
   | "men's clothing"
-  | "jewelery"
+  | "accessoires"
   | "electronics"
   | "women's clothing"
+  | "angebot"
   | "all";
 export default Category;

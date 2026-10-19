@@ -14,7 +14,7 @@ const NeuWaren: React.FC<neuWarenProps> = () => {
       <div className="products-grid">
         <br></br>
         <br></br>
-        <Produkt category="jewelery" />
+        <Produkt category="neue_waren" />
       </div>
       <Chatbot />
     </main>

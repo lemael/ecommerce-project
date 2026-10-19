@@ -1,11 +1,11 @@
-import * as jwt from "jwt-decode";
 
-import { useLocation } from "react-router-dom";
+import * as jwt from "jwt-decode";
+import { Outlet, useLocation } from "react-router-dom";
 
 import Header from "./Header";
 
 interface UserToken {
-  sub: string; // nom ou identifiant
+  sub: string;
   email: string;
   jti?: string;
   iat: number;
@@ -16,34 +16,61 @@ const HeaderWrapper = () => {
   const location = useLocation();
   const userStorage = localStorage.getItem("token");
 
+  const authPages = [
+    "/connexion",
+    "/inscription",
+    "/inscription-reussie",
+  ];
+
+  let header;
+
   try {
-    // Cas 2 : sur login ou register → pas de boutons + pas de username
-    if (
-      location.pathname === "/connexion" ||
-      location.pathname === "/inscription" ||
-      location.pathname === "/inscription-reussie"
-    ) {
-      return <Header isLoggedIn={false} username="" showAuthButtons={false} />;
-    }
-
-    // Cas 3 : utilisateur connecté
-    if (userStorage) {
-      const decodedToken = jwt.jwtDecode(userStorage) as UserToken;
-
-      console.log("Token décodé:", decodedToken.sub);
+    if (authPages.includes(location.pathname)) {
+      header = (
+        <Header
+          isLoggedIn={false}
+          username=""
+          showAuthButtons={false}
+        />
+      );
+    } else if (userStorage) {
+      const decodedToken = jwt.jwtDecode<UserToken>(userStorage);
       const username = decodedToken.sub ?? "";
-      console.log("user décodé:", username);
 
-      return (
-        <Header isLoggedIn={true} username={username} showAuthButtons={false} />
+      header = (
+        <Header
+          isLoggedIn={true}
+          username={username}
+          showAuthButtons={false}
+        />
       );
     } else {
-      return <Header isLoggedIn={false} username="" showAuthButtons={true} />;
+      header = (
+        <Header
+          isLoggedIn={false}
+          username=""
+          showAuthButtons={true}
+        />
+      );
     }
   } catch (error) {
-    console.error("Erreur de décodage du token:", error);
-    return <Header isLoggedIn={false} username="" showAuthButtons={true} />;
+    console.error("Erreur de décodage du token :", error);
+
+    header = (
+      <Header
+        isLoggedIn={false}
+        username=""
+        showAuthButtons={true}
+      />
+    );
   }
+
+  return (
+    <>
+      {header}
+      <Outlet />
+    </>
+  );
 };
 
 export default HeaderWrapper;

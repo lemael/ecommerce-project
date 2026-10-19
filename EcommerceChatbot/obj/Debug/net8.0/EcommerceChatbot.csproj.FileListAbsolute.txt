@@ -358,3 +358,4 @@
 /home/mael/Dokumente/ecommerce-project/EcommerceChatbot/obj/Debug/net8.0/EcommerceChatbot.pdb
 /home/mael/Dokumente/ecommerce-project/EcommerceChatbot/obj/Debug/net8.0/EcommerceChatbot.genruntimeconfig.cache
 /home/mael/Dokumente/ecommerce-project/EcommerceChatbot/obj/Debug/net8.0/ref/EcommerceChatbot.dll
+/home/mael/Dokumente/ecommerce-project/EcommerceChatbot/bin/Debug/net8.0/railway.json

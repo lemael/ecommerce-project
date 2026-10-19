@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Newtonsoft.Json;
-
+using EcommerceChatbot.Repositories;
 using DotNetEnv;
 
 Env.Load();
@@ -60,9 +60,11 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient<UserService>();
 builder.Services.AddTransient<BestellungService>();
 builder.Services.AddHttpClient();
-builder.Services.AddTransient<ProductService>();
+builder.Services.AddHttpClient<ProductService>();
 builder.Services.AddTransient<DetailBestellungService>();
 builder.Services.AddTransient<OpenRouterService>();
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
+builder.Services.AddTransient<IProductService, ProductService>();
 
 // Config JWT
 
@@ -155,92 +157,7 @@ app.MapGet("/form", async () =>
     return Results.Content(html, "text/html");
 });
 
-app.MapGet("/add-products-from-api", async (ProductService productService) =>
-{
-    await productService.AddProductsFromApi();
-    return Results.Ok("Produits ajoutés avec succès");
-});
 
-
-
-app.MapPost("/add-product", async (HttpRequest request, ApplicationDbContext db) =>
-{
-  var form = await request.ReadFormAsync();
-var name = form["name"];
-var price = form["price"];
-var description = form["description"];
-var category = form["category"];
-var image = form["image"];
-
-if (!decimal.TryParse(price, out var productPrice) || productPrice <= 0)
-{
-    return Results.BadRequest("Prix invalide");
-}
-
-if (!int.TryParse(form["quantity"], out var quantity) || quantity <= 0)
-{
-    return Results.BadRequest("Quantité invalide");
-}
-
-    if (string.IsNullOrWhiteSpace(name))
-    {
-        return Results.BadRequest("Nom invalide");
-    }
-if (string.IsNullOrWhiteSpace(description))
-    {
-        return Results.BadRequest("Description invalide");
-    }
-if (string.IsNullOrWhiteSpace(category))
-    {
-        return Results.BadRequest("Catégorie invalide");
-    }
-if (string.IsNullOrWhiteSpace(image))
-    {
-        return Results.BadRequest("Image invalide");
-    }
-
-var product = new Product
-{
-    Name = name,
-    Price = productPrice,
-    Description = description,
-    Category = category,
-    Image = image,
-    Quantity = quantity
-};
-
-    db.Products.Add(product);
-    await db.SaveChangesAsync();
-
-    return Results.Ok("Produit ajouté !");
-});
-app.MapGet("/products", async (ApplicationDbContext db) =>
-{
-    var products = await db.Products.ToListAsync();
-    return Results.Ok(products);
-});
-
-app.MapGet("/products/{id:int}", (int id, ApplicationDbContext db) =>
-{
-    var product = db.Products.FirstOrDefault(p => p.Id == id);
-    return product is not null ? Results.Ok(product) : Results.NotFound();
-});
-app.MapGet("/api/products", () => new { message = "Test réussi" });
-app.MapGet("/debug", async (ApplicationDbContext db) =>
-{
-    try
-    {
-        return Results.Ok(new
-        {
-            dbStatus = await db.Database.CanConnectAsync(),
-            tables = db.Model.GetEntityTypes().Select(e => e.GetTableName())
-        });
-    }
-    catch (Exception ex)
-    {
-        return Results.Problem(ex.ToString());
-    }
-});
 
 
 app.MapControllers();

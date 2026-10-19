@@ -1,60 +1,94 @@
+
 using System.Net.Http;
 using System.Text.Json;
-using Microsoft.EntityFrameworkCore;
-using EcommerceChatbot.Data;
 using EcommerceChatbot.Models;
+using EcommerceChatbot.Repositories;
 
-public class ProductService
+namespace EcommerceChatbot.Services;
+
+public class ProductService : IProductService
 {
     private readonly HttpClient _httpClient;
-    private readonly ApplicationDbContext _db;
+    private readonly IProductRepository _repository;
 
-    public ProductService(HttpClient httpClient, ApplicationDbContext db)
+    public ProductService(
+        HttpClient httpClient,
+        IProductRepository repository)
     {
         _httpClient = httpClient;
-        _db = db;
+        _repository = repository;
+    }
+
+    public Task<List<Product>> GetAllAsync()
+    {
+        return _repository.GetAllAsync();
+    }
+
+    public Task<Product?> GetByIdAsync(int id)
+    {
+        return _repository.GetByIdAsync(id);
+    }
+
+    public async Task AddAsync(Product product)
+    {
+        if (string.IsNullOrWhiteSpace(product.Name))
+            throw new ArgumentException("Le nom est obligatoire.");
+
+        if (product.Price <= 0)
+            throw new ArgumentException("Le prix doit être positif.");
+
+        await _repository.AddAsync(product);
     }
 
     public async Task AddProductsFromApi()
     {
-        var response = await _httpClient.GetAsync("https://fakestoreapi.com/products");
-        response.EnsureSuccessStatusCode();
-        var responseBody = await response.Content.ReadAsStringAsync();
-        var products = JsonSerializer.Deserialize<List<ProductApiModel>>(responseBody);
+        var response = await _httpClient.GetAsync(
+            "https://fakestoreapi.com/products");
 
-        foreach (var product in products!)
-        {
-           if (string.IsNullOrWhiteSpace(product.title))
-        {
-            continue; // ou vous pouvez lancer une exception ou logger l'erreur
-        }
-            var productToAdd = new Product
+        response.EnsureSuccessStatusCode();
+
+        var responseBody = await response.Content.ReadAsStringAsync();
+
+        var products = JsonSerializer.Deserialize<List<ProductApiModel>>(
+            responseBody,
+            new JsonSerializerOptions
             {
-                
-                Name = product.title,
-                Price = (decimal)product.price,
-                Description = product.description,
-                Category = product.category,
-                Image = product.image,
-                Quantity = product.rating.count
+                PropertyNameCaseInsensitive = true
+            });
+
+        if (products == null)
+            throw new InvalidOperationException(
+                "Impossible de lire les produits de l'API.");
+
+        foreach (var item in products)
+        {
+            if (string.IsNullOrWhiteSpace(item.title))
+                continue;
+
+            var product = new Product
+            {
+                Name = item.title,
+                Price = (decimal)item.price,
+                Description = item.description ?? "",
+                Category = item.category ?? "",
+                Image = item.image ?? "",
+                Quantity = item.rating?.count ?? 0
             };
 
-            _db.Products.Add(productToAdd);
+            await _repository.AddAsync(product);
         }
-
-        await _db.SaveChangesAsync();
     }
 }
 
 public class ProductApiModel
 {
     public int Id { get; set; }
-    public string title { get; set; }
+    public string title { get; set; } = "";
     public double price { get; set; }
-    public string description { get; set; }
-    public string category { get; set; }
-    public string image { get; set; }
-    public Rating rating { get; set; }
+    public string? description { get; set; }
+    public string? category { get; set; }
+    public string? image { get; set; }
+    public Rating? rating { get; set; }
 }
 
 public class Rating

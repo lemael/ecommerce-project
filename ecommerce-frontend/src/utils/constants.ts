@@ -1,18 +1,18 @@
 
 const API_URL =
   process.env.REACT_APP_API_URL;
-const ORDERS_URL = `${API_URL}/orders`;
-const PRODUCTS_URL = `${API_URL}/products`;
 const BaseUrl = `${API_URL}/api`;
+const ORDERS_URL = BaseUrl + "/orders";
+const PRODUCTS_URL = BaseUrl + "/products";
 const InscriptionUrl = BaseUrl + "/users";
 const AnmeldenUrl = BaseUrl + "/auth/login";
 const ChatbotUrl = BaseUrl + "/chatbot";
 const InscriptionUrl_frontend = `${API_URL}/inscription`;
 const AnmeldenUrl_frontend = `${API_URL}/connexion`;
 
-const BESTELLEN_URL = `${API_URL}/api/bestellung`;
-const DETAILBESTELLUNG = `${API_URL}/api/detailbestellung`;
-const USER_URL = `${API_URL}/api/Auth`;
+const BESTELLEN_URL = BaseUrl + "/bestellung";
+const DETAILBESTELLUNG = BaseUrl + "/detailbestellung";
+const USER_URL = BaseUrl + "/Auth";
 
 export {
   AnmeldenUrl,

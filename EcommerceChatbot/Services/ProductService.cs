@@ -19,14 +19,14 @@ public class ProductService : IProductService
         _repository = repository;
     }
 
-    public Task<List<Product>> GetAllAsync()
+    public async Task<List<Product>> GetAllAsync()
     {
-        return _repository.GetAllAsync();
+        return await _repository.GetAllAsync();
     }
 
-    public Task<Product?> GetByIdAsync(int id)
+    public async Task<Product?> GetByIdAsync(int id)
     {
-        return _repository.GetByIdAsync(id);
+        return await _repository.GetByIdAsync(id);
     }
 
     public async Task AddAsync(Product product)
@@ -77,6 +77,25 @@ public class ProductService : IProductService
 
             await _repository.AddAsync(product);
         }
+    }
+    public async Task UpdateAsync(Product product)
+    {
+        if (string.IsNullOrWhiteSpace(product.Name))
+           throw new ArgumentException("Le nom est obligatoire.");
+
+        if (product.Price <= 0)
+            throw new ArgumentException("Le prix doit être positif.");
+
+        if (product.Quantity < 0)
+            throw new ArgumentException("La quantité ne peut pas être négative.");
+           
+        
+        await _repository.UpdateAsync(product);
+    }
+
+    public async Task DeleteAsync(int id)
+    {
+        await _repository.DeleteAsync(id);
     }
 }
 

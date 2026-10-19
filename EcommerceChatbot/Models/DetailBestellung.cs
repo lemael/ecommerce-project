@@ -1,7 +1,9 @@
 
 using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace EcommerceChatbot.Models
 {
+    [Table("DetailBestellungen", Schema = "ecommerce")]
     public class DetailBestellung
     {
         public int Id { get; set; }

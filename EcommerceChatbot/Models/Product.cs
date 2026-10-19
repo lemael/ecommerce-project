@@ -1,6 +1,8 @@
 // Models/Product.cs
-namespace EcommerceChatbot.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
+namespace EcommerceChatbot.Models;
+[Table("Products", Schema = "ecommerce")]
 public class Product
 {
     public int Id { get; set; }  // Primary Key

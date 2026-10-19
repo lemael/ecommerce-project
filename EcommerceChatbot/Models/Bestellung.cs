@@ -1,5 +1,7 @@
 namespace EcommerceChatbot.Models
 {
+    using System.ComponentModel.DataAnnotations.Schema;
+    [Table("Bestellungen", Schema = "ecommerce")]
     public class Bestellung
     {
         public int Id { get; set; }
